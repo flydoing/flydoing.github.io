@@ -1,0 +1,937 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="gulp插件,less,rev-append" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="考虑到项目近期的需要，提前学习了一下 gulp 插件之 less编译、rev-append添加版本号，自然是边学边弄个小项目来实践的啦！
+
+cnpm 淘宝 NPM 镜像以前一直是通过 npm 来安装插件的，此做法是直接从国外服务器下载插件的，受网络影响大。于是，淘宝便搞了个 cnpm ：
+
+“这是一个完整 npmjs.org 镜像，你可以用此代替官方版本(只读)，同步频率目前为 10分钟 一次以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gulp 插件之less编译/rev-append版本号">
+<meta property="og:url" content="http://gjincai.github.io/2016/05/29/gulp-插件之less编译-rev-append版本号/index.html">
+<meta property="og:site_name" content="Gjincai">
+<meta property="og:description" content="考虑到项目近期的需要，提前学习了一下 gulp 插件之 less编译、rev-append添加版本号，自然是边学边弄个小项目来实践的啦！
+
+cnpm 淘宝 NPM 镜像以前一直是通过 npm 来安装插件的，此做法是直接从国外服务器下载插件的，受网络影响大。于是，淘宝便搞了个 cnpm ：
+
+“这是一个完整 npmjs.org 镜像，你可以用此代替官方版本(只读)，同步频率目前为 10分钟 一次以">
+<meta property="og:updated_time" content="2017-01-10T15:44:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gulp 插件之less编译/rev-append版本号">
+<meta name="twitter:description" content="考虑到项目近期的需要，提前学习了一下 gulp 插件之 less编译、rev-append添加版本号，自然是边学边弄个小项目来实践的啦！
+
+cnpm 淘宝 NPM 镜像以前一直是通过 npm 来安装插件的，此做法是直接从国外服务器下载插件的，受网络影响大。于是，淘宝便搞了个 cnpm ：
+
+“这是一个完整 npmjs.org 镜像，你可以用此代替官方版本(只读)，同步频率目前为 10分钟 一次以">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> gulp 插件之less编译/rev-append版本号 | Gjincai </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Gjincai</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">理性地过，感性地活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+
+
+      
+      
+        <li class="menu-item menu-item-search">
+        
+          <a href="#" class="st-search-show-outputs">
+        
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '3X43z8sKdCMK7KXsRW_y','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                gulp 插件之less编译/rev-append版本号
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-29T23:30:47+08:00" content="2016-05-29">
+              2016-05-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/gulp/" itemprop="url" rel="index">
+                    <span itemprop="name">gulp</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/29/gulp-插件之less编译-rev-append版本号/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/29/gulp-插件之less编译-rev-append版本号/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/29/gulp-插件之less编译-rev-append版本号/" class="leancloud_visitors" data-flag-title="gulp 插件之less编译/rev-append版本号">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>考虑到项目近期的需要，提前学习了一下 gulp 插件之 less编译、rev-append添加版本号，自然是边学边弄个小项目来实践的啦！</p>
+</blockquote>
+<h2 id="cnpm-淘宝-NPM-镜像"><a href="#cnpm-淘宝-NPM-镜像" class="headerlink" title="cnpm 淘宝 NPM 镜像"></a>cnpm 淘宝 NPM 镜像</h2><p>以前一直是通过 npm 来安装插件的，此做法是直接从国外服务器下载插件的，受网络影响大。于是，淘宝便搞了个 cnpm ：</p>
+<blockquote>
+<p>“这是一个完整 npmjs.org 镜像，你可以用此代替官方版本(只读)，同步频率目前为 10分钟 一次以保证尽量与官方服务同步。”</p>
+</blockquote>
+<p>详细说明移步官网：<br>淘宝镜像官网：<a href="https://npm.taobao.org/" target="_blank" rel="external">淘宝 NPM 镜像</a></p>
+<p>安装 cnpm： <code>$ npm install -g cnpm --registry=https://registry.npm.taobao.org</code>；<br>安装完成后，查看版本号：<code>cnpm -v</code>；<br>使用 cnpm 前，先关闭命令行提示符再重新打开使用；安装完直接使用有可能出现异常。<br>cnpm 与 npm 完全一致，只是在执行命令时将 npm 改为 cnpm 而已。</p>
+<h2 id="初始化准备-目录结构"><a href="#初始化准备-目录结构" class="headerlink" title="初始化准备 目录结构"></a>初始化准备 目录结构</h2><p>新建目录 <code>gulp_revLess</code> ，并在该目录下局部安装gulp：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cnpm install gulp --save-dev</div></pre></td></tr></table></figure>
+<p>安装后，目录中出现一个目录 <code>node_modules</code>、一个文件<code>package.json</code>。</p>
+<p>安装插件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cnpm install gulp-less gulp-minify-css gulp-jshint jshint gulp-uglify gulp-rev-append --save-dev</div></pre></td></tr></table></figure>
+<p>安装后，目录 <code>node_modules</code>下出现了各种插件的对应目录。<br>这里主要用到的插件功能：less编译成css，css压缩，js代码检查，js压缩，css/js的版本号控制。</p>
+<p>再在目录 <code>gulp_revLess</code>下新建目录<code>dev</code>（开发目录）、<code>dist</code>（gulp压缩后目录）；新建文件<code>gulpfile.js</code>;<br>然后在目录<code>dev</code>、<code>dist</code>新建各种代码文件，完成后的目录 <code>gulp_revLess</code>结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">|-gulp_revLess</div><div class="line">    |-dev</div><div class="line">        |-css</div><div class="line">            index.css</div><div class="line">            index.less</div><div class="line">            index1.css</div><div class="line">            index1.less</div><div class="line">        |-js</div><div class="line">            index.js</div><div class="line">        index.html</div><div class="line">    |-dist</div><div class="line">        |-css</div><div class="line">        |-js</div><div class="line">        |-jsapp</div><div class="line">            jquery-1.11.3.min.js</div><div class="line">    |-node_modules</div><div class="line">    gulpfile.js</div><div class="line">    package.json</div></pre></td></tr></table></figure>
+<p>说明：目录<code>dev</code>里面是开发环境的原始代码；目录<code>dist</code>里面是经过 gulp 处理后的正式环境代码；但：目录<code>jsapp</code>下的是引用的js类库（如jquery）,这些不作压缩处理（会报很多错）。</p>
+<h2 id="编写-dev-目录下的代码"><a href="#编写-dev-目录下的代码" class="headerlink" title="编写 dev 目录下的代码"></a>编写 <code>dev</code> 目录下的代码</h2><p>在 <code>dev</code> 目录下，分别编写2个css、1个js、1个html文件，其中<code>index.html</code>中对css/js的引用路径进行后缀处理：<code>?rev=@@hash</code><br>初始化的 <code>index.html</code> 代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span>        </div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span>            </div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>gulp的less rev<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"../dist/css/index.css?rev=@@hash"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"../dist/css/index1.css?rev=@@hash"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../dist/jsapp/jquery-1.11.3.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/index.js?rev=@@hash"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h4</span> <span class="attr">class</span>=<span class="string">"txt"</span>&gt;</span>测试：修改index.css背景色，less编译/css压缩/版本号<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"cont"</span>&gt;</span>测试：修改index1.css背景色，less编译/css压缩/版本号<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"link"</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span>&gt;</span>测试点击JS：修改index.js，压缩/检查/版本号/<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="编辑配置文件gulpfile-js"><a href="#编辑配置文件gulpfile-js" class="headerlink" title="编辑配置文件gulpfile.js"></a>编辑配置文件gulpfile.js</h2><p>打开<code>gulpfile.js</code>文件进行配置编辑，直接上代码，里面附有详细注释：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//引入组件</span></div><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>),</div><div class="line">    less = <span class="built_in">require</span>(<span class="string">'gulp-less'</span>),</div><div class="line">    cssmin = <span class="built_in">require</span>(<span class="string">'gulp-minify-css'</span>),</div><div class="line">    jshint = <span class="built_in">require</span>(<span class="string">'gulp-jshint'</span>),</div><div class="line">    uglify = <span class="built_in">require</span>(<span class="string">'gulp-uglify'</span>),</div><div class="line">    rev = <span class="built_in">require</span>(<span class="string">'gulp-rev-append'</span>);</div><div class="line"></div><div class="line"><span class="comment">//less任务：编译压缩</span></div><div class="line">gulp.task(<span class="string">'less'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> lessSrc = <span class="string">'./dev/css/*.less'</span>,</div><div class="line">        lessDst = <span class="string">'./dist/css'</span>;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> gulp.src(lessSrc)</div><div class="line">        .pipe(less())</div><div class="line">        .pipe(cssmin())</div><div class="line">        .pipe(gulp.dest(lessDst));</div><div class="line">&#125;);</div><div class="line"><span class="comment">//js任务</span></div><div class="line">gulp.task(<span class="string">'js'</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> jsSrc = <span class="string">'./dev/js/*.js'</span>,</div><div class="line">        jsDst =<span class="string">'./dist/js'</span>;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> gulp.src(jsSrc)</div><div class="line">        .pipe(jshint())</div><div class="line">        .pipe(jshint.reporter())</div><div class="line">        .pipe(uglify())</div><div class="line">        .pipe(gulp.dest(jsDst));</div><div class="line">&#125;);</div><div class="line"><span class="comment">//版本号</span></div><div class="line">gulp.task(<span class="string">'rev'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> gulp.src(<span class="string">'./dev/index.html'</span>)</div><div class="line">        .pipe(rev())</div><div class="line">        .pipe(gulp.dest(<span class="string">'./dev'</span>));</div><div class="line">&#125;);</div><div class="line"><span class="comment">//watch</span></div><div class="line">gulp.task(<span class="string">'watch'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//less,rev</span></div><div class="line">    gulp.watch(<span class="string">'./dev/css/*.less'</span>, [<span class="string">'less'</span>,<span class="string">'rev'</span>]);</div><div class="line">    <span class="comment">//js,rev</span></div><div class="line">    gulp.watch(<span class="string">'./dev/js/*.js'</span>, [<span class="string">'js'</span>,<span class="string">'rev'</span>]);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 默认预设任务 清空图片、样式、js并重建 运行语句 gulp</span></div><div class="line">gulp.task(<span class="string">'default'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    gulp.start(<span class="string">'less'</span>,<span class="string">'js'</span>,<span class="string">'rev'</span>,<span class="string">'watch'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="测试gulp"><a href="#测试gulp" class="headerlink" title="测试gulp"></a>测试gulp</h2><p>目前，目录<code>dist</code>下的<code>css/js</code>均为空。<br>现在，在目录<code>gulp_revLess</code>下执行 <code>gulp</code> 命令，成功后，目录<code>dist</code>下的<code>css/js</code>里面已经有了被gulp处理过的css样式/js脚本文件了；而且，此时的<code>index.html</code>中的路径变成了这样：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"../dist/css/index.css?rev=0ebfeb67a96a6e293ec7fe7cb9b3a688"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"../dist/css/index1.css?rev=524cb4d30691bea8e7004eb79d01d6f0"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../dist/jsapp/jquery-1.11.3.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/index.js?rev=6a33c00f34a343a01e5367d3e784272f"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>当我们改变并保存了<code>less/js</code>文件时，被 gulp 监视到并立即执行对应的编译压缩检查改变版本号这些任务。</p>
+<p><strong>注意：</strong> 当修改保存了有语法错误的js文件时候：</p>
+<ol>
+<li>语法出错不严重、不影响js运行时，gulp会弹出报错，但仍然会执行压缩并继续监视；如：代码结尾缺少引文分号，则：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[23:17:48] Starting &apos;js&apos;...</div><div class="line">[23:17:48] Starting &apos;rev&apos;...</div><div class="line">dev\js\index.js: line 5, col 16, Missing semicolon.</div><div class="line"></div><div class="line">1 error</div><div class="line">[23:17:48] Finished &apos;rev&apos; after 22 ms</div><div class="line">[23:17:48] Finished &apos;js&apos; after 30 ms</div></pre></td></tr></table></figure>
+<ol>
+<li>语法出错严重，影响js运行时，gulp会报错并终止任务；如：引文分号写成中文分号：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[23:21:21] Starting &apos;js&apos;...</div><div class="line">[23:21:21] Starting &apos;rev&apos;...</div><div class="line">dev\js\index.js: line 6, col 17, Unexpected &apos;；&apos;.</div><div class="line">dev\js\index.js: line 6, col 17, Missing semicolon.</div><div class="line"></div><div class="line">2 errors</div><div class="line"></div><div class="line">events.js:141</div><div class="line">      throw er; // Unhandled &apos;error&apos; event</div><div class="line">      ^</div><div class="line"> Error</div><div class="line">    at new JS_Parse_Error (eval at &lt;anonymous&gt; (f:\GulpProjects\gulp_revLess1\node_modules\.npminstall\uglify-js\2.6.2\uglify-js\tools\node.js:22:1), &lt;anonymous&gt;:1526:18)</div></pre></td></tr></table></figure>
+<p>完了之后，发现要真在项目中应用，其实还有其它好多东西需要配置好的。下回继续学习！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/gulp/" rel="tag">#gulp</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/24/JS面向对象之对象的创建/" rel="next" title="JS面向对象之对象的创建">
+                <i class="fa fa-chevron-left"></i> JS面向对象之对象的创建
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/10/javascript-模块化编程-面向对象的应用/" rel="prev" title="javascript 模块化编程-面向对象的应用">
+                javascript 模块化编程-面向对象的应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/29/gulp-插件之less编译-rev-append版本号/"
+           data-title="gulp 插件之less编译/rev-append版本号" data-url="http://gjincai.github.io/2016/05/29/gulp-插件之less编译-rev-append版本号/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Guojc" />
+          <p class="site-author-name" itemprop="name">Guojc</p>
+          <p class="site-description motion-element" itemprop="description">Front-End</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gjincai" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3891598477/profile?topnav=1&wvr=6&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cnpm-淘宝-NPM-镜像"><span class="nav-number">1.</span> <span class="nav-text">cnpm 淘宝 NPM 镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化准备-目录结构"><span class="nav-number">2.</span> <span class="nav-text">初始化准备 目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写-dev-目录下的代码"><span class="nav-number">3.</span> <span class="nav-text">编写 dev 目录下的代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑配置文件gulpfile-js"><span class="nav-number">4.</span> <span class="nav-text">编辑配置文件gulpfile.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试gulp"><span class="nav-number">5.</span> <span class="nav-text">测试gulp</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guojc</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gjincai"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("8Dkd17xtByuuhGQS9Np4A3V5-gzGzoHsz", "NkoriNyqwzWTzvEIXqTEYWbb");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+</body>
+</html>

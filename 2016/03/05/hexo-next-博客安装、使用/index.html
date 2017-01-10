@@ -1,0 +1,992 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="hexo安装,next,部署到github,ssh key" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="最近经常遇上了 hexo 主题的博客，心底痒痒的，于是自己也开始由之前的 WordPress个人博客 转向了 hexo 。过程的坑坑补补虽是郁闷，不过折腾过后还是感觉棒棒的。第一次正式使用 markdown 写文章，好像有点慢，幸好上手还是挺快的。
+
+准备工作本次安装的 hexo 版本为 hexo 3.2.0 （git bash 下执行 hexo -v 可知），win10 的 64位 系统。首先">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo + next 博客安装、使用">
+<meta property="og:url" content="http://gjincai.github.io/2016/03/05/hexo-next-博客安装、使用/index.html">
+<meta property="og:site_name" content="Gjincai">
+<meta property="og:description" content="最近经常遇上了 hexo 主题的博客，心底痒痒的，于是自己也开始由之前的 WordPress个人博客 转向了 hexo 。过程的坑坑补补虽是郁闷，不过折腾过后还是感觉棒棒的。第一次正式使用 markdown 写文章，好像有点慢，幸好上手还是挺快的。
+
+准备工作本次安装的 hexo 版本为 hexo 3.2.0 （git bash 下执行 hexo -v 可知），win10 的 64位 系统。首先">
+<meta property="og:updated_time" content="2017-01-10T15:44:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo + next 博客安装、使用">
+<meta name="twitter:description" content="最近经常遇上了 hexo 主题的博客，心底痒痒的，于是自己也开始由之前的 WordPress个人博客 转向了 hexo 。过程的坑坑补补虽是郁闷，不过折腾过后还是感觉棒棒的。第一次正式使用 markdown 写文章，好像有点慢，幸好上手还是挺快的。
+
+准备工作本次安装的 hexo 版本为 hexo 3.2.0 （git bash 下执行 hexo -v 可知），win10 的 64位 系统。首先">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> hexo + next 博客安装、使用 | Gjincai </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Gjincai</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">理性地过，感性地活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+
+
+      
+      
+        <li class="menu-item menu-item-search">
+        
+          <a href="#" class="st-search-show-outputs">
+        
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '3X43z8sKdCMK7KXsRW_y','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                hexo + next 博客安装、使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-05T23:32:42+08:00" content="2016-03-05">
+              2016-03-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">hexo</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/05/hexo-next-博客安装、使用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/05/hexo-next-博客安装、使用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/03/05/hexo-next-博客安装、使用/" class="leancloud_visitors" data-flag-title="hexo + next 博客安装、使用">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>最近经常遇上了 <a href="https://hexo.io/zh-cn/" target="_blank" rel="external">hexo</a> 主题的博客，心底痒痒的，于是自己也开始由之前的 <a href="http://guojincai.sinaapp.com/" target="_blank" rel="external">WordPress个人博客</a> 转向了 hexo 。过程的坑坑补补虽是郁闷，不过折腾过后还是感觉棒棒的。<br>第一次正式使用 <code>markdown</code> 写文章，好像有点慢，幸好上手还是挺快的。</p>
+</blockquote>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>本次安装的 <code>hexo</code> 版本为 hexo 3.2.0 （git bash 下执行 <code>hexo -v</code> 可知），win10 的 64位 系统。<br>首先需要安装以下：</p>
+<ul>
+<li><a href="https://nodejs.org/en/" target="_blank" rel="external">node.js</a><br>  跟普通软件安装一样不断 next ，搜一下也有详细图文安装教程</li>
+<li><a href="http://git-scm.com/downloads" target="_blank" rel="external">git</a><br>  同上，选择对应的系统、位数的版本</li>
+<li><a href="https://tortoisegit.org/download/" target="_blank" rel="external">tortoisegit</a><br>  这个可装可不装，它是 <code>git</code> 操作的简化</li>
+<li><a href="http://www.sublimetext.com/" target="_blank" rel="external">sublime text</a><br>  文本编辑器，用来修改配置、编辑文章；当然 <code>txt</code> 也行</li>
+</ul>
+<h2 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><ol>
+<li>新建一个文件，可明名 <code>hexo</code> 。</li>
+<li>在 <code>hexo</code> 下，右键点击 <code>git bash</code> .</li>
+<li><p>用 <code>npm</code> 安装 <code>hexo</code> （默认安装的是最新的版本），输入：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-cli -g</div></pre></td></tr></table></figure>
+<p> 备注：卸载</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm uninstall hexo-cli -g</div></pre></td></tr></table></figure>
+<p> 旧版本的安装/卸载，去掉 <code>-cli</code> ，即 <code>npm install hexo -g</code> 。</p>
+</li>
+<li><p>用 <code>npm</code> 安装 <code>hexo</code> ，输入：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-cli -g</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装依赖包、插件 ，输入：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动本地服务器，输入：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo s</div></pre></td></tr></table></figure>
+</li>
+<li><p>用浏览器打开 <code>http://localhost:4000</code> 若看到博客页面初识页面（默认主题是 <code>landscape</code>） ，即成功。</p>
+</li>
+</ol>
+<h2 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置 _config.yml"></a>配置 _config.yml</h2><p>用文本编辑器 <code>sublime text</code> 或 <code>txt</code> 打开 <code>hexo</code> 目录下的 <code>_config.yml</code> ，进行站点的信息配置。这里只挑一些常规的看看：<br>（详细请看 <a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="external">官方中文api</a>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># Site</div><div class="line">title: Gjincai  #标题</div><div class="line">subtitle: 理性地过，感性地活    #副标题</div><div class="line">description: Front End  #描述</div><div class="line">author: guojc  #作者</div><div class="line">language: zh-Hans  #语言</div><div class="line">timezone:</div><div class="line"></div><div class="line"># Extensions</div><div class="line">## Plugins: https://hexo.io/plugins/</div><div class="line">## Themes: https://hexo.io/themes/</div><div class="line">theme: next #主题</div></pre></td></tr></table></figure>
+<h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><p>更多主题选择尽在 <a href="https://hexo.io/themes/" target="_blank" rel="external">官方主题</a>；<br>本站博客选择的主题是 <code>next</code> ，简明详细官方说明文档 <a href="http://theme-next.iissnan.com/five-minutes-setup.html" target="_blank" rel="external">5 分钟快速安装</a> 。</p>
+<p>官方说明文档已经好简明易懂的了，这里简单说一下个人使用时的一些情况：</p>
+<ul>
+<li><p>在 <code>下载 Next 主题</code> 项，提供 2 种方法，明显的一个差异是：</p>
+<ol>
+<li><p><code>git clone</code> 得到的是最新版，它包含有三种 <code>scheme</code> :</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#scheme: Muse</div><div class="line">#scheme: Mist</div><div class="line">#scheme: Pisces</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>下载稳定版本</code> 只有一种：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#scheme: Muse</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>一些坑：</p>
+<ol>
+<li>配置文件的修改、mardown 的编写， <code>: x</code> 冒号的后面切记有一个空格！！！</li>
+<li><p>社交链接图标全为地球形状时，注意主题文件夹下的 <code>_config.yml</code> 里、将 <code># Social links</code> 和 <code># Social Icons</code> 中的 <code>GitHub</code> <code>Weibo</code> 保持一致，包括大小写：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># Social links</div><div class="line">social:</div><div class="line">  GitHub: https://github.com/gjincai</div><div class="line">  Weibo: http://weibo.com/3891598477/profile?topnav=1&amp;wvr=6&amp;is_all=1</div><div class="line"></div><div class="line"># Social Icons</div><div class="line">    social_icons:</div><div class="line">        enable: true</div><div class="line">        GitHub: github</div><div class="line">        Weibo: weibo</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="部署到-GitHub"><a href="#部署到-GitHub" class="headerlink" title="部署到 GitHub"></a><h2 id="h2-5">部署到 GitHub</h2></h2><ol>
+<li>到 <code>GitHub</code> 注册一个账号，记下注册名：<code>username</code> 和注册邮箱：<code>email@email.com</code> 。</li>
+<li><p>git config 配置<br> 打开 git 命令行、输入（注意改成你自己的 email 、username）：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.email &quot;1262868349@qq.com&quot;</div><div class="line">git config --global user.name &quot;gjincai&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>生成 ssh key<br> 输入（注意改成你自己的 username）：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;1262868349@qq.com&quot;</div></pre></td></tr></table></figure>
+<p> 回车后，出现英文提示、能看懂的，大概是：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">让你输入密钥的保存路径，##直接回车、保持默认路径 /c/Users/Administrator/.ssh/id_rsa</div><div class="line">让你输入密码，##直接回车；</div><div class="line">让你再次输入密码，##直接回车；</div><div class="line">出现一些信息、最后出现正方图形状，##成功了</div></pre></td></tr></table></figure>
+</li>
+<li><p>登录 GitHub 并添加公钥<br> 网页登录 GitHub ，<code>头像</code> ==》 <code>settings</code> ==》<code>SSH keys</code>  ==》 <code>New SSH key</code> ==》 随意输入 <code>title</code> ==》 <code>Key</code> 的值为 公钥的值：在刚才默认保存的路径下、打开 <code>id_rsa.pub</code>、复制里面的全部内容并粘贴。</p>
+</li>
+<li><p>链接 GitHub 测试<br> 输入：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@github.com</div></pre></td></tr></table></figure>
+<p> 然后会弹出，询问 are you sure …connect? 输入 yes 回车：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">are you sure ...connect?yes</div></pre></td></tr></table></figure>
+<p> 成功的话会弹出：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hi，gjincai!.....sccessfully.....</div></pre></td></tr></table></figure>
+</li>
+<li><p>在 GitHub 上 New 一个 <code>repository</code><br> 输入的项目名称为 <code>gjincai.github.io</code> ，即是 <code>username.github.io</code> </p>
+</li>
+<li><p>安装 deploy<br> 在 <code>hexo</code> 目录下右键 <code>git bash</code> ，进行安装 <code>hexo-deployer-git</code> 插件：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置 deploy<br> 打开 <code>hexo</code> 目录下的 <code>_config.yml</code> ，配置 <code>deploy</code>项：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">    type: git</div><div class="line">    repo:</div><div class="line">        github: git@github.com:gjincai/gjincai.github.io.git    #usernsme</div></pre></td></tr></table></figure>
+<p> （备注：传说 <code>hexo2.x.x</code> 版本的 type:github 等等是不同的）</p>
+</li>
+<li><p>部署到 GitHub<br> <code>hexo</code> 目录下执行 git:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d</div></pre></td></tr></table></figure>
+<p> 现在，在浏览器打开： <code>http://gjincai.github.io</code>，即 <code>http://username.github.io</code></p>
+</li>
+</ol>
+<h2 id="多-PC-同步"><a href="#多-PC-同步" class="headerlink" title="多 PC 同步"></a>多 PC 同步</h2><p>这几天对 hexo 折腾，在公司的 PC 上搞、在宿舍自己的笔记本上也搞；问题来了，我在公司更改了 hexo 配置、写了文章，然后自然是保存在了公司 PC ；回到宿舍后，笔记本的本地文件当然就与公司不一致了。</p>
+<p>如何使得 hexo 在多电脑端始终保持同步呢？那就网络同步喽，可以把 hexo文件 上传到网盘、上传到 <code>git</code> ；然后下载、pull 回来。</p>
+<p>然而，当初一开始我选择一个最笨的直接方法 ———— U盘直接把 hexo 整个文件拷贝回来完全替换替换！哈哈！</p>
+<p>当然，前提是要在每一 PC 都要安装好 hexo 环境喽。注意一点：要再设置一次 <code>user.email</code> 、<code>user.name</code>； <code>ssh key</code> 也要生成新的并添加到 <code>github</code>。<br>也就是说，从 <a href="#h2-5">5.部署到 GitHub</a> 开始再配置一次，不然的话，执行部署命令 <code>hexo d</code> 会被阻止。</p>
+<h2 id="继续前行"><a href="#继续前行" class="headerlink" title="继续前行"></a>继续前行</h2><p>折腾到这里，相信已经心痒痒地想要把自己的 <code>hexo next</code> 配置到更完美的境界吧？！<br>常用的几个命令？新建分类、标签云页面？评论？统计？写文章？等等等……</p>
+<p>这一次由 <code>wordpress</code> 转成 <code>hexo</code> ，希望以此为契机、促使自身再起航不断飞跃向前吧！</p>
+<hr>
+<p>参考链接：<br><a href="http://notes.xiamo.tk/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">为NexT主题添加文章阅读量统计功能</a><br><a href="https://xuanwo.org/2014/08/14/hexo-usual-problem/" target="_blank" rel="external">Hexo常见问题解决方案</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag">#hexo</a>
+          
+            <a href="/tags/next/" rel="tag">#next</a>
+          
+            <a href="/tags/github/" rel="tag">#github</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/10/微信分享自定义标题、描述、图片/" rel="prev" title="微信分享自定义标题、描述、图片">
+                微信分享自定义标题、描述、图片 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/05/hexo-next-博客安装、使用/"
+           data-title="hexo + next 博客安装、使用" data-url="http://gjincai.github.io/2016/03/05/hexo-next-博客安装、使用/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Guojc" />
+          <p class="site-author-name" itemprop="name">Guojc</p>
+          <p class="site-description motion-element" itemprop="description">Front-End</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gjincai" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3891598477/profile?topnav=1&wvr=6&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-hexo"><span class="nav-number">2.</span> <span class="nav-text">安装 hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-config-yml"><span class="nav-number">3.</span> <span class="nav-text">配置 _config.yml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装主题"><span class="nav-number">4.</span> <span class="nav-text">安装主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署到-GitHub"><span class="nav-number">5.</span> <span class="nav-text">部署到 GitHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#h2-5"><span class="nav-number">6.</span> <span class="nav-text">部署到 GitHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多-PC-同步"><span class="nav-number">7.</span> <span class="nav-text">多 PC 同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继续前行"><span class="nav-number">8.</span> <span class="nav-text">继续前行</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guojc</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gjincai"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("8Dkd17xtByuuhGQS9Np4A3V5-gzGzoHsz", "NkoriNyqwzWTzvEIXqTEYWbb");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+</body>
+</html>

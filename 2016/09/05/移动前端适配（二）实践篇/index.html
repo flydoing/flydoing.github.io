@@ -1,0 +1,937 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="移动端,rem,适配" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="继续上一篇的内容，这里重点说说通过 rem 来做好移动端的适配。
+
+移动前端的开发，先来熟悉一些基本的东西：
+rem 简介rem（font size of the root element）：相对于根元素字体大小的单位；即，通过 px 设定 html 的 font-size 值，然后其它元素的长宽全部通过 rem 来设置。计算公式：实际显示的大小值 = rem值 * 根元素值比如：
+12345h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动前端适配（二）实践篇">
+<meta property="og:url" content="http://gjincai.github.io/2016/09/05/移动前端适配（二）实践篇/index.html">
+<meta property="og:site_name" content="Gjincai">
+<meta property="og:description" content="继续上一篇的内容，这里重点说说通过 rem 来做好移动端的适配。
+
+移动前端的开发，先来熟悉一些基本的东西：
+rem 简介rem（font size of the root element）：相对于根元素字体大小的单位；即，通过 px 设定 html 的 font-size 值，然后其它元素的长宽全部通过 rem 来设置。计算公式：实际显示的大小值 = rem值 * 根元素值比如：
+12345h">
+<meta property="og:updated_time" content="2017-01-10T15:44:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="移动前端适配（二）实践篇">
+<meta name="twitter:description" content="继续上一篇的内容，这里重点说说通过 rem 来做好移动端的适配。
+
+移动前端的开发，先来熟悉一些基本的东西：
+rem 简介rem（font size of the root element）：相对于根元素字体大小的单位；即，通过 px 设定 html 的 font-size 值，然后其它元素的长宽全部通过 rem 来设置。计算公式：实际显示的大小值 = rem值 * 根元素值比如：
+12345h">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 移动前端适配（二）实践篇 | Gjincai </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Gjincai</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">理性地过，感性地活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+
+
+      
+      
+        <li class="menu-item menu-item-search">
+        
+          <a href="#" class="st-search-show-outputs">
+        
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '3X43z8sKdCMK7KXsRW_y','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                移动前端适配（二）实践篇
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-05T00:22:59+08:00" content="2016-09-05">
+              2016-09-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/web移动前端/" itemprop="url" rel="index">
+                    <span itemprop="name">web移动前端</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/05/移动前端适配（二）实践篇/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/05/移动前端适配（二）实践篇/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/05/移动前端适配（二）实践篇/" class="leancloud_visitors" data-flag-title="移动前端适配（二）实践篇">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>继续上一篇的内容，这里重点说说通过 <code>rem</code> 来做好移动端的适配。</p>
+</blockquote>
+<p>移动前端的开发，先来熟悉一些基本的东西：</p>
+<h2 id="rem-简介"><a href="#rem-简介" class="headerlink" title="rem 简介"></a>rem 简介</h2><p>rem（font size of the root element）：相对于根元素字体大小的单位；<br>即，通过 px 设定 html 的 font-size 值，然后其它元素的长宽全部通过 rem 来设置。<br>计算公式：<br><code>实际显示的大小值 = rem值 * 根元素值</code><br>比如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">html</span>&#123;<span class="attribute">font-size</span>: <span class="number">20px</span>;&#125;</div><div class="line"><span class="comment">/*rem设置*/</span></div><div class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">width</span>:<span class="number">8rem</span>; <span class="attribute">height</span>:<span class="number">4rem</span>; <span class="attribute">font-size</span>:<span class="number">1.5rem</span>;  <span class="attribute">border-radius</span>:<span class="number">5rem</span>;&#125;</div><div class="line"><span class="comment">/*实际显示的大小*/</span></div><div class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">width</span>:<span class="number">160px</span>; <span class="attribute">height</span>:<span class="number">80px</span>; <span class="attribute">font-size</span>:<span class="number">30px</span>;  <span class="attribute">border-radius</span>:<span class="number">100px</span>;&#125;</div></pre></td></tr></table></figure>
+<h2 id="旧版自适应"><a href="#旧版自适应" class="headerlink" title="旧版自适应"></a>旧版自适应</h2><p>我们知道，<code>meta</code> 标签的 <code>maximum-scale</code> 属性可以设置页面的最大缩放；<br>旧版的自适应的思路：</p>
+<ol>
+<li>动态获取当前移动设备的屏幕大小；</li>
+<li>根据当前屏幕大小去计算出缩放的比例；</li>
+<li>将该比例通过 js 动态写入 meta 标签。</li>
+</ol>
+<p>即：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> phoneScale = <span class="built_in">parseInt</span>(<span class="built_in">window</span>.screen.width)/<span class="number">640</span>;</div><div class="line"><span class="built_in">document</span>.write(<span class="string">'&lt;meta name="viewport" content="width=640, initial-scale = '</span>+phoneScale+<span class="string">', maximum-scale = '</span>+phoneScale+<span class="string">',target-densitydpi=device-dpi"&gt;'</span>);</div></pre></td></tr></table></figure>
+<p>这种方式，可以根据不同的屏幕大小、完全按照设计图的比例来缩放；操作简单，所有元素的大小设置权威 px，基本跟平常的 PC端没什么区别。<br>但是，该方式简单粗暴，会使得页面失真严重、变得模糊。</p>
+<h2 id="新版-rem-自适应"><a href="#新版-rem-自适应" class="headerlink" title="新版 rem 自适应"></a>新版 rem 自适应</h2><p>项目的新版自适应方式，是以 rem 为基础的，前面已经对 rem 有所介绍了。</p>
+<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>新版自适应的基本思路：</p>
+<ol>
+<li>根元素 html 的 font-size值 的设置；</li>
+<li>其它所有元素的大小，按照设计图实际大小、用 rem 来设置；</li>
+<li>根据屏幕大小，通过 js 动态修改根元素的 font-size值，到达适配所有移动设备。</li>
+</ol>
+<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><p>我们根据上面的基本思路、来走一遍：</p>
+<h4 id="根元素的确定"><a href="#根元素的确定" class="headerlink" title="根元素的确定"></a>根元素的确定</h4><p>根元素的确定，主要是因为浏览器能识别的最小值为 12px，当值小于 12px 全按照 12 px来渲染。</p>
+<p>假设 html 下font-size 值设置为： font-size:20px，会出现一下问题：<br>假设元素总体长度最大为： 640px/20px=32rem，最小为： 320px/20px=16rem；<br>当设备屏幕缩小时、js 动态等比改变 html 下font-size 值大小；<br>假如当设备宽度减少到 384px 时，此时 html 下font-size 值大小为 384px / 640px * 20=12px（chrome最小能识别）；<br>但是，元素最小宽度是： 320px/20px=16rem，320px &lt; 384px 呀，所以当屏幕在 320px~384px 范围时，font-size 值一直只能按照12px，因此元素就再也不会缩放适应了、进而出现横向滚动条。</p>
+<p>最终确定的重新设置为 font-size:40px，<br>假如当设备宽度减少到 320px 时，此时 html 下font-size 值大小为 320px / 640px * 40=20px；<br>此时，20px，还没到达最小值 12px，仍可缩放；且 320px 为最小宽度 min-width 了，因此 font-size:20px; 就是最小的值了，它大于 12px。</p>
+<h4 id="rem设置元素"><a href="#rem设置元素" class="headerlink" title="rem设置元素"></a>rem设置元素</h4><p>除了根元素font-size是 px 设置的大小，其它所有元素均用 rem 来设置大小；<br>比如，一个 div 在 ui设置图的实际大小是 640px ，那么它用 rem 来设置时是：16rem( 640px/40px = 16rem );</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">html</span>&#123;<span class="attribute">font-size</span>: <span class="number">40px</span>;&#125;</div><div class="line"><span class="comment">/*rem设置*/</span></div><div class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">width</span>:<span class="number">16rem</span>;&#125;</div><div class="line">......</div></pre></td></tr></table></figure>
+<h4 id="动态修改根元素大小"><a href="#动态修改根元素大小" class="headerlink" title="动态修改根元素大小"></a>动态修改根元素大小</h4><p>现在，所有用 rem 设置大小的元素，都是以根元素的 font-size值为基准的；当我们只是修改根元素大小时，那么所有 rem 实际显示的大小都会改变，从而达到适配所有屏幕大小。</p>
+<p>动态修改根元素大小的方式有 2 种，一种是 <code>css媒体查询断点修改</code><br>，一种是 <code>js 动态修改</code>。</p>
+<p>一、css媒体查询断点修改，针对特定的几种常用的屏幕大小、动态修改根元素的 font-size值，具体的计算方式为：<br><code>屏幕大小 / ui实际大小 * 原始根元素大小 = 动态根元素大小</code><br>比如第一种情况：当屏幕大小为345px，ui实际大小为640px，原始跟元素大小为 font-size：40px 时：<br><code>345 / 640 * 40 = 20px</code><br>具体看以下代码：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">html</span>&#123;<span class="attribute">font-size</span>: <span class="number">40px</span>;&#125;</div><div class="line">@<span class="keyword">media</span> (min-width:<span class="number">320px</span>) and (max-width:<span class="number">345px</span>)&#123;</div><div class="line">    <span class="selector-tag">html</span>&#123;<span class="attribute">font-size</span>: <span class="number">20px</span>;&#125;</div><div class="line">&#125;</div><div class="line">@<span class="keyword">media</span> (min-width:<span class="number">346px</span>) and (max-width:<span class="number">360px</span>)&#123;</div><div class="line">    <span class="selector-tag">html</span>&#123;<span class="attribute">font-size</span>: <span class="number">22.5px</span>;&#125;</div><div class="line">&#125;</div><div class="line">@<span class="keyword">media</span> (min-width:<span class="number">361px</span>) and (max-width:<span class="number">375px</span>)&#123;</div><div class="line">    <span class="selector-tag">html</span>&#123;<span class="attribute">font-size</span>: <span class="number">23.4375px</span>;&#125;</div><div class="line">&#125;</div><div class="line">@<span class="keyword">media</span> (min-width:<span class="number">376px</span>) and (max-width:<span class="number">420px</span>)&#123;</div><div class="line">    <span class="selector-tag">html</span>&#123;<span class="attribute">font-size</span>: <span class="number">26.25px</span>;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>二、js 动态修改根元素大小，不是断点式的，而是连续的，即所有的屏幕大小都能做到自适应。<br>这里主要依赖一段代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*pageFit start*/</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">pageFit</span>(<span class="params">doc,win,maxwidth,minwidth,font</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> docEl = doc.documentElement,</div><div class="line">        resizeEvt = <span class="string">'orientationchange'</span> <span class="keyword">in</span> <span class="built_in">window</span> ? <span class="string">'orientationchange'</span> : <span class="string">'resize'</span>,</div><div class="line">        recalc = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> clientWidth = docEl.clientWidth;</div><div class="line">            <span class="keyword">if</span> (!clientWidth) <span class="keyword">return</span>;</div><div class="line">            <span class="comment">//最大最小width范围内，自由缩放</span></div><div class="line">            <span class="keyword">if</span>(clientWidth&gt;=minwidth&amp;&amp;clientWidth&lt;=maxwidth)&#123;</div><div class="line">                docEl.style.fontSize = font * (clientWidth / maxwidth) + <span class="string">'px'</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//超出最大宽度，误差校准</span></div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(clientWidth&gt;maxwidth)&#123;</div><div class="line">                docEl.style.fontSize = font+<span class="string">'px'</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//小于最小宽度，误差校准</span></div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(clientWidth&lt;minwidth)&#123;</div><div class="line">                docEl.style.fontSize = font * (minwidth / maxwidth) + <span class="string">'px'</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    <span class="keyword">if</span> (!doc.addEventListener) <span class="keyword">return</span>;</div><div class="line">    win.addEventListener(resizeEvt, recalc, <span class="literal">false</span>);</div><div class="line">    doc.addEventListener(<span class="string">'DOMContentLoaded'</span>, recalc, <span class="literal">false</span>);</div><div class="line">&#125;</div><div class="line">pageFit(<span class="built_in">document</span>,<span class="built_in">window</span>,<span class="number">640</span>,<span class="number">320</span>,<span class="number">40</span>);    <span class="comment">//最大宽度maxwidth，最小宽度minwidth，html下的font-size</span></div><div class="line"><span class="comment">/*pageFit end*/</span></div></pre></td></tr></table></figure>
+<p>最后，附上该项目的线上地址： <a href="http://pyw.cn/" target="_blank" rel="external">项目地址</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web移动前端/" rel="tag">#web移动前端</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/03/移动前端适配（一）基础篇/" rel="next" title="移动前端适配（一）基础篇">
+                <i class="fa fa-chevron-left"></i> 移动前端适配（一）基础篇
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/24/前端小团队的小规范/" rel="prev" title="前端小团队的小规范">
+                前端小团队的小规范 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/05/移动前端适配（二）实践篇/"
+           data-title="移动前端适配（二）实践篇" data-url="http://gjincai.github.io/2016/09/05/移动前端适配（二）实践篇/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Guojc" />
+          <p class="site-author-name" itemprop="name">Guojc</p>
+          <p class="site-description motion-element" itemprop="description">Front-End</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gjincai" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3891598477/profile?topnav=1&wvr=6&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rem-简介"><span class="nav-number">1.</span> <span class="nav-text">rem 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#旧版自适应"><span class="nav-number">2.</span> <span class="nav-text">旧版自适应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新版-rem-自适应"><span class="nav-number">3.</span> <span class="nav-text">新版 rem 自适应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本思路"><span class="nav-number">3.1.</span> <span class="nav-text">基本思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际应用"><span class="nav-number">3.2.</span> <span class="nav-text">实际应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#根元素的确定"><span class="nav-number">3.2.1.</span> <span class="nav-text">根元素的确定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rem设置元素"><span class="nav-number">3.2.2.</span> <span class="nav-text">rem设置元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态修改根元素大小"><span class="nav-number">3.2.3.</span> <span class="nav-text">动态修改根元素大小</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guojc</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gjincai"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("8Dkd17xtByuuhGQS9Np4A3V5-gzGzoHsz", "NkoriNyqwzWTzvEIXqTEYWbb");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,916 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="json,遍历多维对象数组,javascript遍历,jquery遍历" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="近日，项目要求对一些长列表页进行优化、改成下拉滚动异步加载的形式。这样一来，php后台 只需扔一串 json 数据过来，剩下的全部工作就由 web前端 为所欲为啦！其实也就只是把 json 数据填进前端的样式页面而已嘛。顺利完成该工作后，发现自己在 javascript/jquery 读取多维 json 数据还是略显费劲。于是自定义了一些 json 数组去折腾折腾探个究竟。
+
+js/jq 读取多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript/jquery 读取多维 json">
+<meta property="og:url" content="http://gjincai.github.io/2016/03/24/javascript-jquery-读取多维-json/index.html">
+<meta property="og:site_name" content="Gjincai">
+<meta property="og:description" content="近日，项目要求对一些长列表页进行优化、改成下拉滚动异步加载的形式。这样一来，php后台 只需扔一串 json 数据过来，剩下的全部工作就由 web前端 为所欲为啦！其实也就只是把 json 数据填进前端的样式页面而已嘛。顺利完成该工作后，发现自己在 javascript/jquery 读取多维 json 数据还是略显费劲。于是自定义了一些 json 数组去折腾折腾探个究竟。
+
+js/jq 读取多">
+<meta property="og:updated_time" content="2017-01-10T15:44:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript/jquery 读取多维 json">
+<meta name="twitter:description" content="近日，项目要求对一些长列表页进行优化、改成下拉滚动异步加载的形式。这样一来，php后台 只需扔一串 json 数据过来，剩下的全部工作就由 web前端 为所欲为啦！其实也就只是把 json 数据填进前端的样式页面而已嘛。顺利完成该工作后，发现自己在 javascript/jquery 读取多维 json 数据还是略显费劲。于是自定义了一些 json 数组去折腾折腾探个究竟。
+
+js/jq 读取多">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> javascript/jquery 读取多维 json | Gjincai </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Gjincai</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">理性地过，感性地活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+
+
+      
+      
+        <li class="menu-item menu-item-search">
+        
+          <a href="#" class="st-search-show-outputs">
+        
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '3X43z8sKdCMK7KXsRW_y','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                javascript/jquery 读取多维 json
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-24T22:36:51+08:00" content="2016-03-24">
+              2016-03-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/json/" itemprop="url" rel="index">
+                    <span itemprop="name">json</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/24/javascript-jquery-读取多维-json/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/24/javascript-jquery-读取多维-json/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/03/24/javascript-jquery-读取多维-json/" class="leancloud_visitors" data-flag-title="javascript/jquery 读取多维 json">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>近日，项目要求对一些长列表页进行优化、改成下拉滚动异步加载的形式。这样一来，php后台 只需扔一串 json 数据过来，剩下的全部工作就由 web前端 为所欲为啦！其实也就只是把 json 数据填进前端的样式页面而已嘛。顺利完成该工作后，发现自己在 javascript/jquery 读取多维 json 数据还是略显费劲。于是自定义了一些 json 数组去折腾折腾探个究竟。</p>
+</blockquote>
+<h2 id="js-jq-读取多维-json-逐一探索"><a href="#js-jq-读取多维-json-逐一探索" class="headerlink" title="js/jq 读取多维 json 逐一探索"></a>js/jq 读取多维 json 逐一探索</h2><p>用最笨的方式，先定义一个多维 json ，然后以各种方式去尝试读取摸索，最后得出想要的方式。<br>直接上代码，里面全是赤露露的测试实验数据：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>json<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>json test<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span> <span class="attr">id</span>=<span class="string">"testid"</span>&gt;</span>点击读取<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"jquery-1.11.3.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> data=<span class="string">''</span>;</div><div class="line">    data=&#123;</div><div class="line">        <span class="string">"allow"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="string">"message"</span>: <span class="string">"yes"</span>,</div><div class="line">        <span class="string">"grade1"</span>: &#123;</div><div class="line">            <span class="string">"class1"</span>: [</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"id"</span>: <span class="string">"111"</span>,</div><div class="line">                    <span class="string">"num"</span>: <span class="string">"40"</span>,</div><div class="line">                    <span class="string">"boy"</span>: <span class="string">"25"</span>,</div><div class="line">                    <span class="string">"girl"</span>:<span class="string">"15"</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"id"</span>: <span class="string">"112"</span>,</div><div class="line">                    <span class="string">"num"</span>: <span class="string">"50"</span>,</div><div class="line">                    <span class="string">"boy"</span>: <span class="string">"20"</span>,</div><div class="line">                    <span class="string">"girl"</span>:<span class="string">"30"</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"id"</span>: <span class="string">"113"</span>,</div><div class="line">                    <span class="string">"num"</span>: <span class="string">"40"</span>,</div><div class="line">                    <span class="string">"boy"</span>: <span class="string">"25"</span>,</div><div class="line">                    <span class="string">"girl"</span>:<span class="string">"15"</span></div><div class="line">                &#125;</div><div class="line">            ],</div><div class="line">            <span class="string">"class2"</span>: [</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"id"</span>: <span class="string">"121"</span>,</div><div class="line">                    <span class="string">"num"</span>: <span class="string">"40"</span>,</div><div class="line">                    <span class="string">"boy"</span>: <span class="string">"25"</span>,</div><div class="line">                    <span class="string">"girl"</span>:<span class="string">"15"</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"id"</span>: <span class="string">"122"</span>,</div><div class="line">                    <span class="string">"num"</span>: <span class="string">"40"</span>,</div><div class="line">                    <span class="string">"boy"</span>: <span class="string">"25"</span>,</div><div class="line">                    <span class="string">"girl"</span>:<span class="string">"15"</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"id"</span>: <span class="string">"123"</span>,</div><div class="line">                    <span class="string">"num"</span>: <span class="string">"40"</span>,</div><div class="line">                    <span class="string">"boy"</span>: <span class="string">"25"</span>,</div><div class="line">                    <span class="string">"girl"</span>:<span class="string">"15"</span></div><div class="line">                &#125;</div><div class="line">            ],</div><div class="line">            <span class="string">"class3"</span>: []</div><div class="line">        &#125;,</div><div class="line">        <span class="string">"grade2"</span>: &#123;</div><div class="line">            <span class="string">"class1"</span>: [],</div><div class="line">            <span class="string">"class2"</span>: [</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"id"</span>: <span class="string">"221"</span>,</div><div class="line">                    <span class="string">"num"</span>: <span class="string">"50"</span>,</div><div class="line">                    <span class="string">"boy"</span>: <span class="string">"35"</span>,</div><div class="line">                    <span class="string">"girl"</span>:<span class="string">"15"</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"id"</span>: <span class="string">"222"</span>,</div><div class="line">                    <span class="string">"num"</span>: <span class="string">"50"</span>,</div><div class="line">                    <span class="string">"boy"</span>: <span class="string">"35"</span>,</div><div class="line">                    <span class="string">"girl"</span>:<span class="string">"15"</span></div><div class="line">                &#125;,</div><div class="line">                &#123;</div><div class="line">                    <span class="string">"id"</span>: <span class="string">"223"</span>,</div><div class="line">                    <span class="string">"num"</span>: <span class="string">"50"</span>,</div><div class="line">                    <span class="string">"boy"</span>: <span class="string">"35"</span>,</div><div class="line">                    <span class="string">"girl"</span>:<span class="string">"15"</span></div><div class="line">                &#125;</div><div class="line">            ],</div><div class="line">            <span class="string">"class3"</span>: []</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="comment">//一、jquery 遍历读取json</span></div><div class="line">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        $(<span class="string">'#testid'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(data);</div><div class="line">            <span class="comment">// alert(data);    //[object,Object]</span></div><div class="line">            <span class="comment">// alert(data.allow);  //true</span></div><div class="line">            <span class="comment">// alert(data.message);  //yes</span></div><div class="line">            <span class="comment">// alert(data.grade1);  //[object,Object]</span></div><div class="line">            <span class="comment">// alert(data.grade1.class1);  //[object,Object],[object,Object],[object,Object]</span></div><div class="line">            <span class="comment">// alert(data.grade1.class1.id);   //undefined</span></div><div class="line">            <span class="comment">//1.1 直入</span></div><div class="line">            $.each(data.grade1.class1,<span class="function"><span class="keyword">function</span>(<span class="params">i,item</span>)</span>&#123;</div><div class="line">                <span class="comment">// alert(i);   //0,1,2</span></div><div class="line">                <span class="comment">// alert(item);    //三个 [object,Object]</span></div><div class="line">                $.each(item,<span class="function"><span class="keyword">function</span>(<span class="params">i,item</span>)</span>&#123;</div><div class="line">                    <span class="comment">// alert(i);   //id,num,boy,girl,id,num,boy,girl,id,num,boy,girl</span></div><div class="line">                    <span class="comment">// alert(item);    //111,40,25,15,112,40,25,15,113,40,25,15</span></div><div class="line">                    </div><div class="line">                &#125;);</div><div class="line">            &#125;);</div><div class="line">            <span class="comment">//1.2 条件</span></div><div class="line">            $.each(data,<span class="function"><span class="keyword">function</span>(<span class="params">i,item</span>)</span>&#123;</div><div class="line">                <span class="comment">// alert(i);   //allow,message,grade1,grade2</span></div><div class="line">                <span class="comment">// alert(item);    //true,yes,[object,Object],[object,Object]</span></div><div class="line">                <span class="keyword">if</span>(i==<span class="string">'grade1'</span>)&#123;</div><div class="line">                    $.each(item,<span class="function"><span class="keyword">function</span>(<span class="params">i,item</span>)</span>&#123;</div><div class="line">                        <span class="comment">// alert(i);   //class1,class2,class3</span></div><div class="line">                        <span class="comment">// alert(item);    </span></div><div class="line">                        <span class="comment">//[object,Object],[object,Object],[object,Object]</span></div><div class="line">                        <span class="comment">//[object,Object],[object,Object],[object,Object]</span></div><div class="line">                        <span class="comment">//(空)</span></div><div class="line">                        <span class="keyword">if</span>(i==<span class="string">'class1'</span>)&#123;</div><div class="line">                            $.each(item,<span class="function"><span class="keyword">function</span>(<span class="params">i,item</span>)</span>&#123;</div><div class="line">                                <span class="comment">// alert(i);   //0,1,2</span></div><div class="line">                                <span class="comment">// alert(item);    //[object,Object]</span></div><div class="line">                                <span class="comment">// alert(item.id);     //221,222,223</span></div><div class="line">                            &#125;);</div><div class="line">                        &#125;</div><div class="line">                    &#125;);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="comment">//二、javascript 遍历读取json</span></div><div class="line">    <span class="comment">//2.1 摸索实验</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> o <span class="keyword">in</span> data)&#123;</div><div class="line">        <span class="comment">// alert(o);   //allow,message,grade1,grade2</span></div><div class="line">        <span class="keyword">if</span>(o==<span class="string">'message'</span>)&#123;</div><div class="line">            <span class="comment">// alert(data.o);      //undefine</span></div><div class="line">            <span class="comment">// alert(data[o]);     //yes,</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(o==<span class="string">'grade1'</span>)&#123;</div><div class="line">            <span class="comment">// alert(data[o]);     //[object,Object]</span></div><div class="line">            <span class="comment">// alert(data[o].class1);  //[object,Object],[object,Object],[object,Object]</span></div><div class="line">            <span class="comment">// alert(data[o][class1]);  //报错：class1 is not defined</span></div><div class="line">            <span class="comment">/*</span></div><div class="line">            for(var oo in o)&#123;</div><div class="line">                // alert(oo);      //0,1,2,3,4,5</div><div class="line">                // alert(o.oo);        //6个undefine</div><div class="line">            &#125;</div><div class="line">            */</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">var</span> oo <span class="keyword">in</span> data[o])&#123;</div><div class="line">                <span class="comment">// alert(oo);      //class1,class2,class3</span></div><div class="line">                <span class="keyword">if</span>(oo==<span class="string">'class2'</span>)&#123;</div><div class="line">                    <span class="comment">// alert(oo);      //class2</span></div><div class="line">                    <span class="comment">// alert(oo.id);       //undefine</span></div><div class="line">                    <span class="comment">/*for(var ooo in data[o].class2)&#123;</span></div><div class="line">                        // alert(ooo);     //0,1,2</div><div class="line">                        // alert(ooo.id);      //三个undefine</div><div class="line">                        alert(data[o].class2.ooo);  //三个undefine</div><div class="line">                    &#125;*/</div><div class="line">                    <span class="keyword">for</span>(<span class="keyword">var</span> ooo <span class="keyword">in</span> data[o][oo])&#123;</div><div class="line">                        <span class="comment">//或者：for(var ooo in data[o].class2)</span></div><div class="line">                        <span class="comment">// alert(ooo);     //1,2,3</span></div><div class="line">                        <span class="comment">// alert(data[o][oo][ooo]);    //三个 [object,Object]</span></div><div class="line">                        <span class="comment">// alert(data[o][oo][0]);    //三个 [object,Object]</span></div><div class="line">                        <span class="keyword">for</span>(<span class="keyword">var</span> oooo <span class="keyword">in</span> data[o][oo][ooo])&#123;</div><div class="line">                            <span class="comment">// alert(oooo);    //三次 id,num,boy,girl</span></div><div class="line">                            <span class="comment">// alert(data[o][oo][ooo][oooo]);  //对应上一行的12个数字：121,40,25</span></div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//2.2 直入</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> o <span class="keyword">in</span> data.grade1.class2)&#123;</div><div class="line">        <span class="comment">// alert(o);   //0,1,2</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> oo <span class="keyword">in</span> data.grade1.class2[o])&#123;</div><div class="line">            <span class="comment">// alert(oo);      //三次 id,num,boy,girl</span></div><div class="line">            <span class="comment">// alert(data.grade1.class2[o][oo]);  //对应上一行的12个数字：121,40,25</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//2.2 长变量重新赋给短的</span></div><div class="line">    <span class="keyword">var</span> mydata=data.grade1.class2;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> o <span class="keyword">in</span> mydata)&#123;</div><div class="line">        <span class="comment">// alert(o);   //0,1,2</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> oo <span class="keyword">in</span> mydata[o])&#123;</div><div class="line">            alert(oo);      <span class="comment">//三次 id,num,boy,girl</span></div><div class="line">            <span class="comment">// alert(mydata[o][oo]);  //对应上一行的12个数字：121,40,25</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="ajax-异步请求-data-数填入-html-结构"><a href="#ajax-异步请求-data-数填入-html-结构" class="headerlink" title="ajax 异步请求 data 数填入 html 结构"></a>ajax 异步请求 data 数填入 html 结构</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ajaxNum=<span class="number">1</span>;      <span class="comment">//php后台要求告诉他是第几次请求，给递增参数吧</span></div><div class="line">$(<span class="built_in">window</span>).on(<span class="string">'scroll'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//滚动条到达底部：发现移动端和PC网页端，对于相同的的页面高度、总是有0.xxx的误差，所以用Math.ceil(）将其向上取整就好了。</span></div><div class="line">    <span class="keyword">if</span>($(<span class="built_in">document</span>).height()-$(<span class="built_in">window</span>).height() == <span class="built_in">Math</span>.ceil($(<span class="built_in">window</span>).scrollTop()))&#123;</div><div class="line">        <span class="comment">//alert('到达底部！');</span></div><div class="line">        ajaxNum=ajaxNum+<span class="number">1</span>;</div><div class="line">        ajaxGiveme(ajaxNum);</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajaxGiveme</span>(<span class="params">$num</span>)</span></div><div class="line">&#123;</div><div class="line">    $.ajax(&#123;</div><div class="line">        <span class="attr">type</span>:<span class="string">"POST"</span>,</div><div class="line">        <span class="attr">url</span>:<span class="string">"/xxx/xxxxxx"</span>,  <span class="comment">//php后台的接口地址</span></div><div class="line">        dataType:<span class="string">"json"</span>,</div><div class="line">        <span class="attr">data</span>:&#123;<span class="string">"num"</span>:$num&#125;,</div><div class="line">        <span class="attr">success</span>:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">            <span class="comment">//对 data 进行遍历读取吧</span></div><div class="line">            <span class="comment">//将数据填入 html 结构，这里有注意的事情，看下一点说明</span></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">error</span>:<span class="function"><span class="keyword">function</span>(<span class="params">request</span>)</span>&#123;</div><div class="line">            <span class="comment">// alert('提交失败，请稍后尝试');</span></div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="json-填入-html-的一些事儿"><a href="#json-填入-html-的一些事儿" class="headerlink" title="json 填入 html 的一些事儿"></a>json 填入 html 的一些事儿</h2><ul>
+<li>html 与 json 数据变量的混结合：注意 <code>&quot;&quot;</code> ，<code>&#39;&#39;</code>啊！尤其是注意 <code>src</code>，<code>href</code> 的 引号啊！</li>
+</ul>
+<figure class="highlight html"><figcaption><span>js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- html页面 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'div1'</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">'order/order_result/123'</span>&gt;</span>链接<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">'img-big'</span> <span class="attr">src</span>=<span class="string">'images/list1.png'</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>说明<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- jquery --&gt;</span></div><div class="line">var newhtml="<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'div1'</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">'order/order_result/"+item.id+"'</span>&gt;</span>链接<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">'img-big'</span> <span class="attr">src</span>=<span class="string">'"+item.pic_detail+"'</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>"+item.instroduction+"<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>";</div><div class="line">$('#id').append(newhtml);</div></pre></td></tr></table></figure>
+<ul>
+<li>php 与 html，js 与 html<br>php 可在 html 写判断决定某元素是否出现，我大 js 也来吧：</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">if</span>($v[<span class="string">'can1'</span>]==<span class="number">1</span> || $v[<span class="string">'can2'</span>]==<span class="number">3</span>):<span class="meta">?&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span> <span class="attr">class</span>=<span class="string">"link"</span>&gt;</span>链接<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">endif</span>;<span class="meta">?&gt;</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> can=item.can1==<span class="number">1</span> || item.can2==<span class="number">3</span>;</div><div class="line"><span class="keyword">if</span>(can)&#123;</div><div class="line">    <span class="comment">//插入 &lt;a href="javascript:;" class="link"&gt;链接&lt;/a&gt;</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span>&#123;</div><div class="line">    <span class="comment">//none</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>php 还可以嵌在 html 里计算什么的各种。js当然也能啦！<br>还有其它很多的技巧、考虑，就得以后多用多实践了。有了这一次的开始，就让它根本停不下来吧！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+            <a href="/tags/jquery/" rel="tag">#jquery</a>
+          
+            <a href="/tags/json/" rel="tag">#json</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/19/修改-hash-值保持-tab、ajax-前进后退的历史记录/" rel="next" title="修改 hash 值保持 tab、ajax 前进后退的历史记录">
+                <i class="fa fa-chevron-left"></i> 修改 hash 值保持 tab、ajax 前进后退的历史记录
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/28/javascript-jquery-BOM窗口位置大小/" rel="prev" title="javascript/jquery BOM窗口位置大小">
+                javascript/jquery BOM窗口位置大小 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/24/javascript-jquery-读取多维-json/"
+           data-title="javascript/jquery 读取多维 json" data-url="http://gjincai.github.io/2016/03/24/javascript-jquery-读取多维-json/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Guojc" />
+          <p class="site-author-name" itemprop="name">Guojc</p>
+          <p class="site-description motion-element" itemprop="description">Front-End</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gjincai" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3891598477/profile?topnav=1&wvr=6&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#js-jq-读取多维-json-逐一探索"><span class="nav-number">1.</span> <span class="nav-text">js/jq 读取多维 json 逐一探索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ajax-异步请求-data-数填入-html-结构"><span class="nav-number">2.</span> <span class="nav-text">ajax 异步请求 data 数填入 html 结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json-填入-html-的一些事儿"><span class="nav-number">3.</span> <span class="nav-text">json 填入 html 的一些事儿</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guojc</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gjincai"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("8Dkd17xtByuuhGQS9Np4A3V5-gzGzoHsz", "NkoriNyqwzWTzvEIXqTEYWbb");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+</body>
+</html>
