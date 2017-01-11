@@ -1,0 +1,946 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="wap手机网站,项目总结,前端技术栈" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="近期完成的一个 wap手机小站 ，过后稍微总结一下。
+
+思考如今，angular/react/vue 的大热，使得 jquery 即将退去的形势变得更为明朗。思考一番，倘若如今摒弃了 jquery 、哪个框架会更合适自己目前的项目呢？当下的这个wap手机小站，大量的ajax数据进行前后交互，这不就是 SPA 单页面应用的趋势么？结合近期正在学到的 react-router ,觉得到时有必要将该">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wap手机小站开发总结">
+<meta property="og:url" content="http://gjincai.github.io/2017/01/11/wap手机小站开发总结/index.html">
+<meta property="og:site_name" content="Gjincai">
+<meta property="og:description" content="近期完成的一个 wap手机小站 ，过后稍微总结一下。
+
+思考如今，angular/react/vue 的大热，使得 jquery 即将退去的形势变得更为明朗。思考一番，倘若如今摒弃了 jquery 、哪个框架会更合适自己目前的项目呢？当下的这个wap手机小站，大量的ajax数据进行前后交互，这不就是 SPA 单页面应用的趋势么？结合近期正在学到的 react-router ,觉得到时有必要将该">
+<meta property="og:updated_time" content="2017-01-11T14:05:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wap手机小站开发总结">
+<meta name="twitter:description" content="近期完成的一个 wap手机小站 ，过后稍微总结一下。
+
+思考如今，angular/react/vue 的大热，使得 jquery 即将退去的形势变得更为明朗。思考一番，倘若如今摒弃了 jquery 、哪个框架会更合适自己目前的项目呢？当下的这个wap手机小站，大量的ajax数据进行前后交互，这不就是 SPA 单页面应用的趋势么？结合近期正在学到的 react-router ,觉得到时有必要将该">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> wap手机小站开发总结 | Gjincai </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Gjincai</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">理性地过，感性地活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+
+
+      
+      
+        <li class="menu-item menu-item-search">
+        
+          <a href="#" class="st-search-show-outputs">
+        
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '3X43z8sKdCMK7KXsRW_y','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                wap手机小站开发总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-11T21:41:16+08:00" content="2017-01-11">
+              2017-01-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/项目/" itemprop="url" rel="index">
+                    <span itemprop="name">项目</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/11/wap手机小站开发总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/11/wap手机小站开发总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/11/wap手机小站开发总结/" class="leancloud_visitors" data-flag-title="wap手机小站开发总结">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>近期完成的一个 <em>wap手机小站</em> ，过后稍微总结一下。</p>
+</blockquote>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>如今，angular/react/vue 的大热，使得 jquery 即将退去的形势变得更为明朗。思考一番，倘若如今摒弃了 jquery 、哪个框架会更合适自己目前的项目呢？<br>当下的这个wap手机小站，大量的ajax数据进行前后交互，这不就是 SPA 单页面应用的趋势么？结合近期正在学到的 <code>react-router</code> ,觉得到时有必要将该 <em>wap手机小站</em> 用react来重构一下，为学习探索之用。 </p>
+<p>在这之前，还是先对当下这个刚完成的wap手机小站总结一下吧：</p>
+<h2 id="基本目录"><a href="#基本目录" class="headerlink" title="基本目录"></a>基本目录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">|-- html</div><div class="line">    |-- list</div><div class="line">        list1.html</div><div class="line">        list2.html</div><div class="line">    |-- detail</div><div class="line">    |-- user</div><div class="line">    index.html</div><div class="line">    //……………</div><div class="line">|-- static</div><div class="line">    |-- dev</div><div class="line">        |-- css</div><div class="line">            |-- compoment</div><div class="line">                base.scss</div><div class="line">                //……………</div><div class="line">            |-- style</div><div class="line">                index.scss</div><div class="line">                list.scss</div><div class="line">                //……………</div><div class="line">        |-- js</div><div class="line">            |-- compoment</div><div class="line">                myCom.js</div><div class="line">                //……………</div><div class="line">            |-- dom</div><div class="line">                index.js</div><div class="line">                list.js</div><div class="line">                //……………</div><div class="line">            |-- plugins</div><div class="line">                jquery.min.js</div><div class="line">                swiper.min.js</div><div class="line">                //……………</div><div class="line">        |-- images</div><div class="line">            //……………</div><div class="line">    |-- dist</div><div class="line">        //与dev目录完全一样，.scss变成.css</div><div class="line">        //……………</div></pre></td></tr></table></figure>
+<h2 id="gulp"><a href="#gulp" class="headerlink" title="gulp"></a>gulp</h2><p>构建工具gulp主要用到的模块：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>),</div><div class="line">    sass = <span class="built_in">require</span>(<span class="string">"gulp-sass"</span>),                <span class="comment">//sass预处理</span></div><div class="line">    cleancss = <span class="built_in">require</span>(<span class="string">'gulp-clean-css'</span>),       <span class="comment">//css压缩</span></div><div class="line">    uglify = <span class="built_in">require</span>(<span class="string">'gulp-uglify'</span>),            <span class="comment">//js的压缩</span></div><div class="line">    imagemin = <span class="built_in">require</span>(<span class="string">'gulp-imagemin'</span>),        <span class="comment">//图片的压缩</span></div><div class="line">    pngquant = <span class="built_in">require</span>(<span class="string">'imagemin-pngquant'</span>),    <span class="comment">//图片压缩的参数设置</span></div><div class="line">    cssurl = <span class="built_in">require</span>(<span class="string">'gulp-make-css-url-version'</span>),  <span class="comment">//css文件里引用url加版本号</span></div><div class="line">    plumber = <span class="built_in">require</span>(<span class="string">'gulp-plumber'</span>),          <span class="comment">//出错时gulp任务不中断，并捕获错误</span></div><div class="line">    sourcemaps = <span class="built_in">require</span>(<span class="string">'gulp-sourcemaps'</span>),    <span class="comment">//映射到对应的sass文件,css文件是压缩</span></div><div class="line">    changed = <span class="built_in">require</span>(<span class="string">'gulp-changed'</span>),          <span class="comment">//仅仅传递更改过的文件</span></div><div class="line">    cleanmap = <span class="built_in">require</span>(<span class="string">'gulp-clean'</span>),           <span class="comment">//清楚生成的 .map 文件</span></div><div class="line">    rev = <span class="built_in">require</span>(<span class="string">'gulp-rev-append'</span>);           <span class="comment">//版本号，html中的js,css路径版本号</span></div><div class="line">    browserSync = <span class="built_in">require</span>(<span class="string">'browser-sync'</span>).create();     <span class="comment">//自动刷新浏览器</span></div></pre></td></tr></table></figure>
+<p>一些说明：<br><strong>gulp-changed</strong>：在设置watch的task任务时，往往监视的是一个目录下的所有js/css文件；当该目录下的其中一个js/css被修改并保存后，会触发该目录下所有的js/css文件进行处理。<br>gulp-changed 可以实现仅仅传递更改过的文件进入pipe()；<br>但是在sass编译的时候，<code>.scss</code>文件 -&gt; <code>.css</code>文件，本身就已经发生了变化，因此还是会把该目录下的所有 <code>.scss</code>文件进行了处理。暂且只能尽量把css分类别分目录进行监视，以减少那些未改动过不必要的处理。<br><strong>gulp-rev-append</strong>：当html文件中的js/css引入写法是绝对路径的时候，<code>gulp-rev-append</code>失效、不能即时改变url后面的版本号。如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">href=&quot;http://aaa.com/aaa/wap/dist/css/style/index.css?rev=@@hash&quot;   //失效，rev=@@hash没有被替换成 MD5</div></pre></td></tr></table></figure>
+<h2 id="require-js"><a href="#require-js" class="headerlink" title="require.js"></a>require.js</h2><p>require.js 模块化js，<strong>js文件的模块化</strong>。<br>js的模块化主要有两方面：</p>
+<ul>
+<li>外部引用的一些jquery插件功能模块(如：jquery,echo,swiper等)</li>
+<li>自身定义的常用公共组件模块（ myModule 里面一般是需求所需最适合自己的自定义功能模块，如一些正则、弹窗组件、cookie、客户端判断等等）</li>
+</ul>
+<p>eg：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//模块引入</span></div><div class="line"><span class="built_in">require</span>([<span class="string">'jquery'</span>, <span class="string">'echo'</span>, <span class="string">'swiper'</span>, <span class="string">'myModule'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">$, echo, swiper, myModule</span>)</span>&#123;</div><div class="line">    <span class="comment">//......</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//模块定义并return</span></div><div class="line"><span class="keyword">var</span> fn1 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"><span class="keyword">var</span> fn2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"><span class="keyword">var</span> fn3 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"><span class="comment">//......</span></div><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">data1</span>: val1,</div><div class="line">    <span class="attr">data2</span>: val2,</div><div class="line">    <span class="attr">data3</span>: val3,</div><div class="line">    <span class="comment">//......</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="js-面向对象"><a href="#js-面向对象" class="headerlink" title="js 面向对象"></a>js 面向对象</h2><p>js 面向对象模块化js，js 文件里 <strong>代码段的模块化</strong>。<br>php 后台仅是把所有数据通过ajax接口扔给web前端，如何对数据进行处理、将其呈现在页面上，都是前端 zepto/jquery 的工作了。如此以来，js的代码量大幅增加。再加上 jquery无穷回调噩梦，所带来的难题雪上加霜。<br>js 代码段的面向对象的小模块化可以一定程度地破解这事。如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.全局数据</span></div><div class="line"><span class="keyword">var</span> data1 = <span class="string">''</span>,</div><div class="line">	data2 = <span class="string">''</span>,</div><div class="line">	isData1 = <span class="literal">false</span>;</div><div class="line"><span class="keyword">var</span> data3 = <span class="string">''</span>,</div><div class="line">	data4 = <span class="string">''</span>,</div><div class="line">	isData2 = <span class="literal">false</span>;</div><div class="line"><span class="comment">//2.init</span></div><div class="line"><span class="keyword">var</span> Index = &#123;</div><div class="line">	<span class="attr">init</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		Func.fn1();</div><div class="line">		Func.fn2();</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"><span class="comment">//3.页面</span></div><div class="line"><span class="keyword">var</span> Func = &#123;</div><div class="line">	<span class="attr">fn1</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</div><div class="line">	<span class="attr">fn2</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</div><div class="line">	<span class="attr">fn3</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</div><div class="line">&#125;;</div><div class="line"><span class="comment">//4.工具</span></div><div class="line"><span class="keyword">var</span> Mod = &#123;</div><div class="line">	<span class="attr">getPic</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</div><div class="line">	<span class="attr">getToken</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</div><div class="line">	<span class="attr">countDown</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</div><div class="line">	<span class="attr">mod1</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</div><div class="line">	<span class="attr">mod2</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</div><div class="line">	<span class="attr">mod3</span>: <span class="function"><span class="keyword">function</span>(<span class="params">thisPhone</span>)</span>&#123;&#125;</div><div class="line">&#125;;</div><div class="line"><span class="comment">//5.入口</span></div><div class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	Index.init();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="ajax-json-jsonp"><a href="#ajax-json-jsonp" class="headerlink" title="ajax/json/jsonp"></a>ajax/json/jsonp</h2><p>页面数据基本全是通过 jsonp 发给前端然后呈现在页面上；大量的数据和dom处理，对于 <code>$.ajax()</code> 的成功回调函数 <code>success: function(){}</code> 将会是一个噩梦；幸亏前面的 js面向对象写法、使得js代码块有了模块化，有效梳理清晰了代码功能之间的条理。</p>
+<p>大量的ajax，自然就有了后台提供的大量的数据接口；某天那位后台说要改个接口，那还不得大面积满js页面地一个个修改？<br>踩过这样的坑，后来干脆把所有接口也放在一个公共js文件中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> port = &#123;</div><div class="line">    <span class="attr">port1</span>: <span class="string">'url1'</span>,  <span class="comment">//接口地址1</span></div><div class="line">    port2: <span class="string">'url2'</span>,  <span class="comment">//接口地址2</span></div><div class="line">    port3: <span class="string">'url3'</span>,  <span class="comment">//接口地址3</span></div><div class="line">    <span class="comment">//......</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>大量的ajax数据，html的js组装：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">addHtml: <span class="function"><span class="keyword">function</span>(<span class="params">games</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> nHtml = <span class="string">''</span>;</div><div class="line">  $.each(games,<span class="function"><span class="keyword">function</span>(<span class="params">i, li</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> downUrl = (lw.mType() == <span class="string">'IOS'</span>) ? li.ios_url: li.andriod_url;</div><div class="line">    nHtml+= <span class="string">'&lt;li class="game-li j_gameLi"&gt;'</span></div><div class="line">	   +     <span class="string">'&lt;a class="game-one" href="http://aaa/game_detail/'</span>+li.id+<span class="string">'.html"&gt;'</span></div><div class="line">	   +       <span class="string">'&lt;img class="game-img" src="'</span>+li.img+<span class="string">'"&gt;'</span></div><div class="line">	   +       <span class="string">'&lt;h4 class="game-name"&gt;'</span>+li.name+<span class="string">'&lt;/h4&gt;'</span></div><div class="line">	   +       <span class="string">'&lt;p class="game-des"&gt;'</span>+li.des+<span class="string">'&lt;/p&gt;'</span></div><div class="line">	   +     <span class="string">'&lt;/a&gt;'</span></div><div class="line">	   +     <span class="string">'&lt;a class="game-btn j_gameBtn" href="'</span>+downUrl+<span class="string">'"&gt;下载&lt;/a&gt;'</span></div><div class="line">	   +    <span class="string">'&lt;/li&gt;'</span>;</div><div class="line">  &#125;);</div><div class="line">  <span class="comment">//插入html</span></div><div class="line">  $(<span class="string">'#id'</span>).append(nHtml);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="sass-rem-emmet-cssrem"><a href="#sass-rem-emmet-cssrem" class="headerlink" title="sass/rem/emmet/cssrem"></a>sass/rem/emmet/cssrem</h2><p>gulp插件 <code>gulp-sourcemaps</code> 将压缩过的 js/css文件 映射到对应的尚未压缩过的 js/sass 文件,在调试中快速定位代码的位置、进行高效调试。<br><code>sass</code> 嵌套带来的一个调试问题：css/sass 的行数定位、一般是定位到元素前的，比如：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.parent</span>&#123;</div><div class="line">    <span class="attribute">position</span>:relative;</div><div class="line">    <span class="selector-class">.child</span>&#123;</div><div class="line">        <span class="attribute">width</span>:<span class="number">100px</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上代码中，假如我们要快速定位到设置 <code>.child</code> 的 width 值的<em>第四行</em>，但是 <code>gulp-sourcemaps</code> 为我们定位到的只是 <code>.parent</code> 处的<em>第一行</em>。<br>当嵌套过深时，定位的偏差就会越大。适度的嵌套可以既保持css的模块、又可方便调试的快速定位；一般一个小组件为一个嵌套的css块。</p>
+<p>移动端的自适应摒弃了百分比的方式，采用了 <strong>rem</strong> 自适应做法（<a href="http://gjincai.github.io/tags/web%E7%A7%BB%E5%8A%A8%E5%89%8D%E7%AB%AF/">移动前端适配</a>）。<br>rem 与 px 的转换，写一个就自己计算一遍么？如此效率不能忍。<br>sublime 插件 <strong>cssrem/rem-unit</strong>均可实现 rem 与 px 自动转换。配置插件中 font-size 值为 40，然后你只管按照ui设计图的大小敲出px大小，cssrem/rem-unit 便会自动进行转换。</p>
+<p>sublime 另一个插件 <strong>emmet</strong>，在写 html 时候会让人有飞一般的感觉。详见  <a href="http://docs.emmet.io/abbreviations/syntax/" target="_blank" rel="external">emmet语法</a></p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p><strong>fiddler、photoshop、fastStoneCapture、apache、chrome、postman、svn、git bash、sublime plugins、phpStorm 等</strong><br>fiddler：将线上的 js/css 静态文件代理为本地对应的文件，堪称一绝；<br>apache： 开个本机的服务器，手机代理到电脑，真机测试（nginx也行）；<br>git bash：主要用来执行 gulp 任务。</p>
+<h2 id="一些坑"><a href="#一些坑" class="headerlink" title="一些坑"></a>一些坑</h2><ul>
+<li>cookie、localStrage在微信浏览器的坑；</li>
+<li>移动端的静态文件的缓存，gulp插件MD5版本号在绝对路径下的失效；</li>
+<li><a>标签的href链接，跳转不到苹果的 appstore；</a></li>
+<li>图片验证码在 mac/safari 一直填写不正确；</li>
+<li>字体图标替换png；</li>
+<li>弹窗填写表单的坑处理；</li>
+<li>删除重复绑定的事件：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#id"</span>).unbind(<span class="string">"click.id"</span>).on(<span class="string">"click.id"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>移动端实时监听输入框值变化：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'input'</span>).on(<span class="string">'input propertychange'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>require.js 的 baseUrl 路径问题；</li>
+<li>等等。</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面向对象/" rel="tag">#面向对象</a>
+          
+            <a href="/tags/gulp/" rel="tag">#gulp</a>
+          
+            <a href="/tags/require-js/" rel="tag">#require.js</a>
+          
+            <a href="/tags/js模块化/" rel="tag">#js模块化</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/08/react-router实例学习-一/" rel="next" title="react-router实例学习(一)">
+                <i class="fa fa-chevron-left"></i> react-router实例学习(一)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/11/wap手机小站开发总结/"
+           data-title="wap手机小站开发总结" data-url="http://gjincai.github.io/2017/01/11/wap手机小站开发总结/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Guojc" />
+          <p class="site-author-name" itemprop="name">Guojc</p>
+          <p class="site-description motion-element" itemprop="description">Front-End</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gjincai" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3891598477/profile?topnav=1&wvr=6&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#思考"><span class="nav-number">1.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本目录"><span class="nav-number">2.</span> <span class="nav-text">基本目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp"><span class="nav-number">3.</span> <span class="nav-text">gulp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#require-js"><span class="nav-number">4.</span> <span class="nav-text">require.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#js-面向对象"><span class="nav-number">5.</span> <span class="nav-text">js 面向对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ajax-json-jsonp"><span class="nav-number">6.</span> <span class="nav-text">ajax/json/jsonp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sass-rem-emmet-cssrem"><span class="nav-number">7.</span> <span class="nav-text">sass/rem/emmet/cssrem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具"><span class="nav-number">8.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些坑"><span class="nav-number">9.</span> <span class="nav-text">一些坑</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guojc</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gjincai"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("8Dkd17xtByuuhGQS9Np4A3V5-gzGzoHsz", "NkoriNyqwzWTzvEIXqTEYWbb");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+</body>
+</html>
