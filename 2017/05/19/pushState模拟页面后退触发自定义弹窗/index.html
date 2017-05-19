@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="移动端,rem,适配" />
+  <meta name="keywords" content="javascript,pushState" />
 
 
 
@@ -57,28 +57,40 @@
 
 
 
-<meta name="description" content="继续上一篇的内容，这里重点说说通过 rem 来做好移动端的适配。
+<meta name="description" content="需求：在h5游戏页面，当用户首次点击后退按钮、退出当前页面之前，弹出自定义的弹窗提示。
 
-移动前端的开发，先来熟悉一些基本的东西：
-rem 简介rem（font size of the root element）：相对于根元素字体大小的单位；即，通过 px 设定 html 的 font-size 值，然后其它元素的长宽全部通过 rem 来设置。计算公式：实际显示的大小值 = rem值 * 根元素值比如：
-12345h">
+beforeunload/unloadbeforeunload/unload 的触发当离开当前页面时，会触发 beforeunload；比如以下操作：
+
+关闭浏览器窗口
+点击返回、前进、主页，刷新页面
+window.open(),location.href=’’,submit提交表单，等
+
+beforeun">
 <meta property="og:type" content="article">
-<meta property="og:title" content="移动前端适配（二）实践篇">
-<meta property="og:url" content="http://gjincai.github.io/2016/09/05/移动前端适配（二）实践篇/index.html">
+<meta property="og:title" content="pushState模拟页面后退触发自定义弹窗">
+<meta property="og:url" content="http://gjincai.github.io/2017/05/19/pushState模拟页面后退触发自定义弹窗/index.html">
 <meta property="og:site_name" content="Gjincai">
-<meta property="og:description" content="继续上一篇的内容，这里重点说说通过 rem 来做好移动端的适配。
+<meta property="og:description" content="需求：在h5游戏页面，当用户首次点击后退按钮、退出当前页面之前，弹出自定义的弹窗提示。
 
-移动前端的开发，先来熟悉一些基本的东西：
-rem 简介rem（font size of the root element）：相对于根元素字体大小的单位；即，通过 px 设定 html 的 font-size 值，然后其它元素的长宽全部通过 rem 来设置。计算公式：实际显示的大小值 = rem值 * 根元素值比如：
-12345h">
-<meta property="og:updated_time" content="2017-01-10T15:44:07.000Z">
+beforeunload/unloadbeforeunload/unload 的触发当离开当前页面时，会触发 beforeunload；比如以下操作：
+
+关闭浏览器窗口
+点击返回、前进、主页，刷新页面
+window.open(),location.href=’’,submit提交表单，等
+
+beforeun">
+<meta property="og:updated_time" content="2017-05-19T14:25:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="移动前端适配（二）实践篇">
-<meta name="twitter:description" content="继续上一篇的内容，这里重点说说通过 rem 来做好移动端的适配。
+<meta name="twitter:title" content="pushState模拟页面后退触发自定义弹窗">
+<meta name="twitter:description" content="需求：在h5游戏页面，当用户首次点击后退按钮、退出当前页面之前，弹出自定义的弹窗提示。
 
-移动前端的开发，先来熟悉一些基本的东西：
-rem 简介rem（font size of the root element）：相对于根元素字体大小的单位；即，通过 px 设定 html 的 font-size 值，然后其它元素的长宽全部通过 rem 来设置。计算公式：实际显示的大小值 = rem值 * 根元素值比如：
-12345h">
+beforeunload/unloadbeforeunload/unload 的触发当离开当前页面时，会触发 beforeunload；比如以下操作：
+
+关闭浏览器窗口
+点击返回、前进、主页，刷新页面
+window.open(),location.href=’’,submit提交表单，等
+
+beforeun">
 
 
 
@@ -96,7 +108,7 @@ rem 简介rem（font size of the root element）：相对于根元素字体大�
   };
 </script>
 
-  <title> 移动前端适配（二）实践篇 | Gjincai </title>
+  <title> pushState模拟页面后退触发自定义弹窗 | Gjincai </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -258,7 +270,7 @@ rem 简介rem（font size of the root element）：相对于根元素字体大�
             
             
               
-                移动前端适配（二）实践篇
+                pushState模拟页面后退触发自定义弹窗
               
             
           </h1>
@@ -270,8 +282,8 @@ rem 简介rem（font size of the root element）：相对于根元素字体大�
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-05T00:22:59+08:00" content="2016-09-05">
-              2016-09-05
+            <time itemprop="dateCreated" datetime="2017-05-19T22:20:46+08:00" content="2017-05-19">
+              2017-05-19
             </time>
           </span>
 
@@ -284,8 +296,8 @@ rem 简介rem（font size of the root element）：相对于根元素字体大�
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/web移动前端/" itemprop="url" rel="index">
-                    <span itemprop="name">web移动前端</span>
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
                   </a>
                 </span>
 
@@ -300,8 +312,8 @@ rem 简介rem（font size of the root element）：相对于根元素字体大�
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/05/移动前端适配（二）实践篇/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/05/移动前端适配（二）实践篇/" itemprop="commentsCount"></span>
+                <a href="/2017/05/19/pushState模拟页面后退触发自定义弹窗/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/19/pushState模拟页面后退触发自定义弹窗/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -311,7 +323,7 @@ rem 简介rem（font size of the root element）：相对于根元素字体大�
 
           
           
-             <span id="/2016/09/05/移动前端适配（二）实践篇/" class="leancloud_visitors" data-flag-title="移动前端适配（二）实践篇">
+             <span id="/2017/05/19/pushState模拟页面后退触发自定义弹窗/" class="leancloud_visitors" data-flag-title="pushState模拟页面后退触发自定义弹窗">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -333,40 +345,36 @@ rem 简介rem（font size of the root element）：相对于根元素字体大�
 
       
         <blockquote>
-<p>继续上一篇的内容，这里重点说说通过 <code>rem</code> 来做好移动端的适配。</p>
+<p>需求：在h5游戏页面，当用户首次点击后退按钮、退出当前页面之前，弹出自定义的弹窗提示。</p>
 </blockquote>
-<p>移动前端的开发，先来熟悉一些基本的东西：</p>
-<h2 id="rem-简介"><a href="#rem-简介" class="headerlink" title="rem 简介"></a>rem 简介</h2><p>rem（font size of the root element）：相对于根元素字体大小的单位；<br>即，通过 px 设定 html 的 font-size 值，然后其它元素的长宽全部通过 rem 来设置。<br>计算公式：<br><code>实际显示的大小值 = rem值 * 根元素值</code><br>比如：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">html</span>&#123;<span class="attribute">font-size</span>: <span class="number">20px</span>;&#125;</div><div class="line"><span class="comment">/*rem设置*/</span></div><div class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">width</span>:<span class="number">8rem</span>; <span class="attribute">height</span>:<span class="number">4rem</span>; <span class="attribute">font-size</span>:<span class="number">1.5rem</span>;  <span class="attribute">border-radius</span>:<span class="number">5rem</span>;&#125;</div><div class="line"><span class="comment">/*实际显示的大小*/</span></div><div class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">width</span>:<span class="number">160px</span>; <span class="attribute">height</span>:<span class="number">80px</span>; <span class="attribute">font-size</span>:<span class="number">30px</span>;  <span class="attribute">border-radius</span>:<span class="number">100px</span>;&#125;</div></pre></td></tr></table></figure>
-<h2 id="旧版自适应"><a href="#旧版自适应" class="headerlink" title="旧版自适应"></a>旧版自适应</h2><p>我们知道，<code>meta</code> 标签的 <code>maximum-scale</code> 属性可以设置页面的最大缩放；<br>旧版的自适应的思路：</p>
+<h2 id="beforeunload-unload"><a href="#beforeunload-unload" class="headerlink" title="beforeunload/unload"></a>beforeunload/unload</h2><p><strong>beforeunload/unload 的触发</strong><br>当离开当前页面时，会触发 beforeunload；比如以下操作：</p>
 <ol>
-<li>动态获取当前移动设备的屏幕大小；</li>
-<li>根据当前屏幕大小去计算出缩放的比例；</li>
-<li>将该比例通过 js 动态写入 meta 标签。</li>
+<li>关闭浏览器窗口</li>
+<li>点击返回、前进、主页，刷新页面</li>
+<li>window.open(),location.href=’’,submit提交表单，等</li>
 </ol>
-<p>即：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> phoneScale = <span class="built_in">parseInt</span>(<span class="built_in">window</span>.screen.width)/<span class="number">640</span>;</div><div class="line"><span class="built_in">document</span>.write(<span class="string">'&lt;meta name="viewport" content="width=640, initial-scale = '</span>+phoneScale+<span class="string">', maximum-scale = '</span>+phoneScale+<span class="string">',target-densitydpi=device-dpi"&gt;'</span>);</div></pre></td></tr></table></figure>
-<p>这种方式，可以根据不同的屏幕大小、完全按照设计图的比例来缩放；操作简单，所有元素的大小设置权威 px，基本跟平常的 PC端没什么区别。<br>但是，该方式简单粗暴，会使得页面失真严重、变得模糊。</p>
-<h2 id="新版-rem-自适应"><a href="#新版-rem-自适应" class="headerlink" title="新版 rem 自适应"></a>新版 rem 自适应</h2><p>项目的新版自适应方式，是以 rem 为基础的，前面已经对 rem 有所介绍了。</p>
-<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>新版自适应的基本思路：</p>
+<p><strong>beforeunload 与 unload 触发时间的区别：</strong><br><code>beforeunload</code> 是在没新页面跳转之前触发，此时新页面的新资源请求尚未发出；<br><code>unload</code> 是在旧资源已经卸载，新页面的新资源请求已经发出，但新页面还没替换旧页面的时候触发的；<br>总结： beforeunload 在 unload 之前触发。</p>
+<p><strong>beforeunload 与 unload 的使用示例：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'beforeunload'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'离开页面后、当前的游戏数据将不被保存；确定要离开？'</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>此时，当用户点击触发页面后退时，浏览器会弹出默认弹窗提示。<br>这个默认的弹窗，是浏览器内置的事件；该事件并未对开发者提供可以自定义弹窗的交互接口，开发者不能自定义。<br>因此，<code>beforeunload/unload</code> 不能实现后退时弹窗自定义弹窗的需求。</p>
+<h2 id="pushState-popstate"><a href="#pushState-popstate" class="headerlink" title="pushState/popstate"></a>pushState/popstate</h2><p><code>history.pushState()</code> 方法向浏览器历史添加了一个状态。<br><code>history.pushState(state object, title, URL)</code>，带有三个参数：<br>一个状态对象，一个标题（现在被忽略了），以及一个可选的URL地址。详见 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History/pushState" target="_blank" rel="external">History.pushState()</a></p>
+<p>popstate 事件的触发：<br>点击后退、前进按钮(或者在JavaScript中调用 history.back()、history.forward()、history.go()方法)；<br>调用 history.pushState() 或者 history.replaceState() 不会触发popstate事件</p>
+<p>注意点：</p>
 <ol>
-<li>根元素 html 的 font-size值 的设置；</li>
-<li>其它所有元素的大小，按照设计图实际大小、用 rem 来设置；</li>
-<li>根据屏幕大小，通过 js 动态修改根元素的 font-size值，到达适配所有移动设备。</li>
+<li>History.pushState()可以改变当前 url，但不会刷新页面；</li>
+<li>点击后退离开当前页面，当前的 url 要发生变化（触发hash值的变化）；</li>
+<li>hash值的变化不会刷新当前页面，会触发popstate事件</li>
 </ol>
-<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><p>我们根据上面的基本思路、来走一遍：</p>
-<h4 id="根元素的确定"><a href="#根元素的确定" class="headerlink" title="根元素的确定"></a>根元素的确定</h4><p>根元素的确定，主要是因为浏览器能识别的最小值为 12px，当值小于 12px 全按照 12 px来渲染。</p>
-<p>假设 html 下font-size 值设置为： font-size:20px，会出现一下问题：<br>假设元素总体长度最大为： 640px/20px=32rem，最小为： 320px/20px=16rem；<br>当设备屏幕缩小时、js 动态等比改变 html 下font-size 值大小；<br>假如当设备宽度减少到 384px 时，此时 html 下font-size 值大小为 384px / 640px * 20=12px（chrome最小能识别）；<br>但是，元素最小宽度是： 320px/20px=16rem，320px &lt; 384px 呀，所以当屏幕在 320px~384px 范围时，font-size 值一直只能按照12px，因此元素就再也不会缩放适应了、进而出现横向滚动条。</p>
-<p>最终确定的重新设置为 font-size:40px，<br>假如当设备宽度减少到 320px 时，此时 html 下font-size 值大小为 320px / 640px * 40=20px；<br>此时，20px，还没到达最小值 12px，仍可缩放；且 320px 为最小宽度 min-width 了，因此 font-size:20px; 就是最小的值了，它大于 12px。</p>
-<h4 id="rem设置元素"><a href="#rem设置元素" class="headerlink" title="rem设置元素"></a>rem设置元素</h4><p>除了根元素font-size是 px 设置的大小，其它所有元素均用 rem 来设置大小；<br>比如，一个 div 在 ui设置图的实际大小是 640px ，那么它用 rem 来设置时是：16rem( 640px/40px = 16rem );</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">html</span>&#123;<span class="attribute">font-size</span>: <span class="number">40px</span>;&#125;</div><div class="line"><span class="comment">/*rem设置*/</span></div><div class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">width</span>:<span class="number">16rem</span>;&#125;</div><div class="line">......</div></pre></td></tr></table></figure>
-<h4 id="动态修改根元素大小"><a href="#动态修改根元素大小" class="headerlink" title="动态修改根元素大小"></a>动态修改根元素大小</h4><p>现在，所有用 rem 设置大小的元素，都是以根元素的 font-size值为基准的；当我们只是修改根元素大小时，那么所有 rem 实际显示的大小都会改变，从而达到适配所有屏幕大小。</p>
-<p>动态修改根元素大小的方式有 2 种，一种是 <code>css媒体查询断点修改</code><br>，一种是 <code>js 动态修改</code>。</p>
-<p>一、css媒体查询断点修改，针对特定的几种常用的屏幕大小、动态修改根元素的 font-size值，具体的计算方式为：<br><code>屏幕大小 / ui实际大小 * 原始根元素大小 = 动态根元素大小</code><br>比如第一种情况：当屏幕大小为345px，ui实际大小为640px，原始跟元素大小为 font-size：40px 时：<br><code>345 / 640 * 40 = 20px</code><br>具体看以下代码：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">html</span>&#123;<span class="attribute">font-size</span>: <span class="number">40px</span>;&#125;</div><div class="line">@<span class="keyword">media</span> (min-width:<span class="number">320px</span>) and (max-width:<span class="number">345px</span>)&#123;</div><div class="line">    <span class="selector-tag">html</span>&#123;<span class="attribute">font-size</span>: <span class="number">20px</span>;&#125;</div><div class="line">&#125;</div><div class="line">@<span class="keyword">media</span> (min-width:<span class="number">346px</span>) and (max-width:<span class="number">360px</span>)&#123;</div><div class="line">    <span class="selector-tag">html</span>&#123;<span class="attribute">font-size</span>: <span class="number">22.5px</span>;&#125;</div><div class="line">&#125;</div><div class="line">@<span class="keyword">media</span> (min-width:<span class="number">361px</span>) and (max-width:<span class="number">375px</span>)&#123;</div><div class="line">    <span class="selector-tag">html</span>&#123;<span class="attribute">font-size</span>: <span class="number">23.4375px</span>;&#125;</div><div class="line">&#125;</div><div class="line">@<span class="keyword">media</span> (min-width:<span class="number">376px</span>) and (max-width:<span class="number">420px</span>)&#123;</div><div class="line">    <span class="selector-tag">html</span>&#123;<span class="attribute">font-size</span>: <span class="number">26.25px</span>;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>二、js 动态修改根元素大小，不是断点式的，而是连续的，即所有的屏幕大小都能做到自适应。<br>这里主要依赖一段代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*pageFit start*/</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">pageFit</span>(<span class="params">doc,win,maxwidth,minwidth,font</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> docEl = doc.documentElement,</div><div class="line">        resizeEvt = <span class="string">'orientationchange'</span> <span class="keyword">in</span> <span class="built_in">window</span> ? <span class="string">'orientationchange'</span> : <span class="string">'resize'</span>,</div><div class="line">        recalc = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> clientWidth = docEl.clientWidth;</div><div class="line">            <span class="keyword">if</span> (!clientWidth) <span class="keyword">return</span>;</div><div class="line">            <span class="comment">//最大最小width范围内，自由缩放</span></div><div class="line">            <span class="keyword">if</span>(clientWidth&gt;=minwidth&amp;&amp;clientWidth&lt;=maxwidth)&#123;</div><div class="line">                docEl.style.fontSize = font * (clientWidth / maxwidth) + <span class="string">'px'</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//超出最大宽度，误差校准</span></div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(clientWidth&gt;maxwidth)&#123;</div><div class="line">                docEl.style.fontSize = font+<span class="string">'px'</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//小于最小宽度，误差校准</span></div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(clientWidth&lt;minwidth)&#123;</div><div class="line">                docEl.style.fontSize = font * (minwidth / maxwidth) + <span class="string">'px'</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    <span class="keyword">if</span> (!doc.addEventListener) <span class="keyword">return</span>;</div><div class="line">    win.addEventListener(resizeEvt, recalc, <span class="literal">false</span>);</div><div class="line">    doc.addEventListener(<span class="string">'DOMContentLoaded'</span>, recalc, <span class="literal">false</span>);</div><div class="line">&#125;</div><div class="line">pageFit(<span class="built_in">document</span>,<span class="built_in">window</span>,<span class="number">640</span>,<span class="number">320</span>,<span class="number">40</span>);    <span class="comment">//最大宽度maxwidth，最小宽度minwidth，html下的font-size</span></div><div class="line"><span class="comment">/*pageFit end*/</span></div></pre></td></tr></table></figure>
-<p>最后，附上该项目的线上地址： <a href="http://pyw.cn/" target="_blank" rel="external">项目地址</a></p>
+<h2 id="页面后退自定义弹窗"><a href="#页面后退自定义弹窗" class="headerlink" title="页面后退自定义弹窗"></a>页面后退自定义弹窗</h2><p>基本思路：</p>
+<ol>
+<li>进入页面，当前 url 为： <code>a.com/game.html</code></li>
+<li>进入页面后，立即 pushState 一个新链接（追加了hash值）到 history 中，改变了链接但页面没刷新，此时 url 为 <code>a.com/game.html#leaveStatus</code>；同时将变量 <code>leaveStatus = 1</code> ；</li>
+<li>用户点击了后退，此时 url 后退到 <code>a.com/game.html</code>，但页面未刷新；同时触发了 popstate 事件；</li>
+<li>触发了 popstate 事件,若此时 <code>leaveStatus = 1</code>，则显示自定义弹窗</li>
+</ol>
+<p>具体实现代码（新增了cookie设置，一天内不再弹窗）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Tool = &#123;</div><div class="line">    <span class="attr">getCookie</span>: <span class="function"><span class="keyword">function</span>(<span class="params">cname</span>)</span>&#123;</div><div class="line">      <span class="keyword">var</span> name = cname + <span class="string">"="</span>;</div><div class="line">        <span class="keyword">var</span> ca = <span class="built_in">document</span>.cookie.split(<span class="string">';'</span>);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;ca.length; i++) </div><div class="line">        &#123;</div><div class="line">          <span class="keyword">var</span> c = ca[i].trim();</div><div class="line">          <span class="keyword">if</span> (c.indexOf(name)==<span class="number">0</span>) <span class="keyword">return</span> c.substring(name.length,c.length);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">    &#125;,</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> leaveStatus = <span class="number">0</span>;</div><div class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> tit = <span class="built_in">document</span>.title,</div><div class="line">    path;</div><div class="line">  <span class="comment">//首次进入页面时才加入#leaveStatus；当只是刷新页面时，不再重复加入#leaveStatus</span></div><div class="line">  <span class="keyword">if</span>(location.hash != <span class="string">'#leaveStatus'</span>)&#123;</div><div class="line">    path = location.href.replace(<span class="regexp">/#.*$/</span>, <span class="string">''</span>) + <span class="string">'#leaveStatus'</span>;</div><div class="line">    <span class="comment">// 将追加了hash的链接推入history中</span></div><div class="line">    history.pushState(&#123;</div><div class="line">      <span class="attr">title</span>: tit,</div><div class="line">      <span class="attr">path</span>: path</div><div class="line">    &#125;,</div><div class="line">    tit, path);</div><div class="line">  &#125;</div><div class="line">  leaveStatus = <span class="number">1</span>;</div><div class="line">&#125;);</div><div class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'popstate'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> isPop = Tool.getCookie(<span class="string">'isPop'</span>);</div><div class="line">  <span class="keyword">if</span>(isPop == <span class="string">'no'</span>)&#123;</div><div class="line">    <span class="built_in">window</span>.history.go(<span class="number">-1</span>);</div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">    <span class="keyword">if</span> (leaveStatus == <span class="number">1</span>) &#123;</div><div class="line">      leaveStatus = <span class="number">0</span>;</div><div class="line">      <span class="comment">//myPop();      //执行自定义弹窗效果</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>the end 。</p>
 
       
     </div>
@@ -381,7 +389,7 @@ rem 简介rem（font size of the root element）：相对于根元素字体大�
       
         <div class="post-tags">
           
-            <a href="/tags/web移动前端/" rel="tag">#web移动前端</a>
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
           
         </div>
       
@@ -390,17 +398,13 @@ rem 简介rem（font size of the root element）：相对于根元素字体大�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/03/移动前端适配（一）基础篇/" rel="next" title="移动前端适配（一）基础篇">
-                <i class="fa fa-chevron-left"></i> 移动前端适配（一）基础篇
+              <a href="/2017/01/13/hexo-从-windows-转移至-Mac/" rel="next" title="hexo 从 windows 转移至 Mac">
+                <i class="fa fa-chevron-left"></i> hexo 从 windows 转移至 Mac
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/24/前端小团队的小规范/" rel="prev" title="前端小团队的小规范">
-                前端小团队的小规范 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -426,8 +430,8 @@ rem 简介rem（font size of the root element）：相对于根元素字体大�
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/05/移动前端适配（二）实践篇/"
-           data-title="移动前端适配（二）实践篇" data-url="http://gjincai.github.io/2016/09/05/移动前端适配（二）实践篇/">
+      <div class="ds-thread" data-thread-key="2017/05/19/pushState模拟页面后退触发自定义弹窗/"
+           data-title="pushState模拟页面后退触发自定义弹窗" data-url="http://gjincai.github.io/2017/05/19/pushState模拟页面后退触发自定义弹窗/">
       </div>
     
   </div>
@@ -540,7 +544,7 @@ rem 简介rem（font size of the root element）：相对于根元素字体大�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rem-简介"><span class="nav-number">1.</span> <span class="nav-text">rem 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#旧版自适应"><span class="nav-number">2.</span> <span class="nav-text">旧版自适应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新版-rem-自适应"><span class="nav-number">3.</span> <span class="nav-text">新版 rem 自适应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本思路"><span class="nav-number">3.1.</span> <span class="nav-text">基本思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际应用"><span class="nav-number">3.2.</span> <span class="nav-text">实际应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#根元素的确定"><span class="nav-number">3.2.1.</span> <span class="nav-text">根元素的确定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rem设置元素"><span class="nav-number">3.2.2.</span> <span class="nav-text">rem设置元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态修改根元素大小"><span class="nav-number">3.2.3.</span> <span class="nav-text">动态修改根元素大小</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#beforeunload-unload"><span class="nav-number">1.</span> <span class="nav-text">beforeunload/unload</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pushState-popstate"><span class="nav-number">2.</span> <span class="nav-text">pushState/popstate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页面后退自定义弹窗"><span class="nav-number">3.</span> <span class="nav-text">页面后退自定义弹窗</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
