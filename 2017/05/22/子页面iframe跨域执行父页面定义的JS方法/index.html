@@ -338,7 +338,7 @@
 <h2 id="同域时-iframe-调用父页面的JS方法"><a href="#同域时-iframe-调用父页面的JS方法" class="headerlink" title="同域时 iframe 调用父页面的JS方法"></a>同域时 iframe 调用父页面的JS方法</h2><p>在同域的情况下，子iframe页面可以很方便地直接调用父页面定义的JS方法：<br><code>window.parent.fn();</code> 或者 <code>window.top.fn();</code><br><strong>window.self</strong>: 当前窗口自身的引用<br><strong>window.parent</strong>: 上一级父窗口的引用<br><strong>window.top</strong>: 最顶层窗口的引用<br>当页面中不存在 iframe 嵌套时，则 window.self, window.parent, window.top 三者均是当前窗口自身的引用。</p>
 <p>比如，<code>parent.html</code> 和 <code>child.html</code> 均在 <code>a.com</code> 的同一域名下,</p>
 <p><code>parent.html</code> 代码:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">"gameIframe"</span> <span class="attr">name</span>=<span class="string">"gameIframe"</span> <span class="attr">src</span>=<span class="string">"./game_iframe.html"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 或者 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">"gameIframe"</span> <span class="attr">name</span>=<span class="string">"gameIframe"</span> <span class="attr">src</span>=<span class="string">"a.com/game_iframe.html"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">    function sayHi () &#123;</div><div class="line">        alert('hi!');</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">"gameIframe"</span> <span class="attr">name</span>=<span class="string">"gameIframe"</span> <span class="attr">src</span>=<span class="string">"./game_iframe.html"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 或者 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">"gameIframe"</span> <span class="attr">name</span>=<span class="string">"gameIframe"</span> <span class="attr">src</span>=<span class="string">"a.com/game_iframe.html"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">sayHi</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        alert(<span class="string">'hi!'</span>);</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
 <p><code>child.html</code> 代码:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.parent.sayHi(); <span class="comment">//或者 top.sayHi();</span></div></pre></td></tr></table></figure>
 <p>当 <code>&lt;iframe&gt;</code> 的链接与父页面不同域时，则子页面的 iframe 不能调用父页面定义的方法，会报错；<br>如：<code>parent.html</code> 在 <code>a.com</code> 域名下，但子 iframe 的链接与 <code>a.com</code> 不同域:</p>
@@ -386,6 +386,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/17/vue全家桶上手小项目/" rel="prev" title="vue全家桶上手小项目">
+                vue全家桶上手小项目 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -457,7 +461,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -465,7 +469,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -474,7 +478,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
