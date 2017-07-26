@@ -1,0 +1,927 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="mongodb,vue,mongoose" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="之前刚入门vue并做好了一个简而全的纯vue2全家桶的项目，数据都是本地 json 模拟请求的；详情请移步这里：vue-proj-demo
+为了真正做到数据库的真实存取，于是又开始入门了 node+express+mongoose 、并以此来为之前的vue页面写后台数据接口。
+本文涉及的源码： vue-node-proj
+基本数据模型 schema
+以下涉及到mongodb操作的前提，是要配置好m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="express+mongoose 实现简易后台数据接口">
+<meta property="og:url" content="http://gjincai.github.io/2017/07/26/express-mongoose-实现简易后台数据接口/index.html">
+<meta property="og:site_name" content="Gjincai">
+<meta property="og:description" content="之前刚入门vue并做好了一个简而全的纯vue2全家桶的项目，数据都是本地 json 模拟请求的；详情请移步这里：vue-proj-demo
+为了真正做到数据库的真实存取，于是又开始入门了 node+express+mongoose 、并以此来为之前的vue页面写后台数据接口。
+本文涉及的源码： vue-node-proj
+基本数据模型 schema
+以下涉及到mongodb操作的前提，是要配置好m">
+<meta property="og:updated_time" content="2017-07-26T13:49:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="express+mongoose 实现简易后台数据接口">
+<meta name="twitter:description" content="之前刚入门vue并做好了一个简而全的纯vue2全家桶的项目，数据都是本地 json 模拟请求的；详情请移步这里：vue-proj-demo
+为了真正做到数据库的真实存取，于是又开始入门了 node+express+mongoose 、并以此来为之前的vue页面写后台数据接口。
+本文涉及的源码： vue-node-proj
+基本数据模型 schema
+以下涉及到mongodb操作的前提，是要配置好m">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> express+mongoose 实现简易后台数据接口 | Gjincai </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Gjincai</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">理性地过，感性地活</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+
+
+      
+      
+        <li class="menu-item menu-item-search">
+        
+          <a href="#" class="st-search-show-outputs">
+        
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '3X43z8sKdCMK7KXsRW_y','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                express+mongoose 实现简易后台数据接口
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-07-26T21:41:49+08:00" content="2017-07-26">
+              2017-07-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/mongodb-node/" itemprop="url" rel="index">
+                    <span itemprop="name">mongodb,node</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/07/26/express-mongoose-实现简易后台数据接口/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/26/express-mongoose-实现简易后台数据接口/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/07/26/express-mongoose-实现简易后台数据接口/" class="leancloud_visitors" data-flag-title="express+mongoose 实现简易后台数据接口">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前刚入门vue并做好了一个简而全的纯vue2全家桶的项目，数据都是本地 json 模拟请求的；详情请移步这里：<a href="https://github.com/gjincai/vue-proj-demo" target="_blank" rel="external">vue-proj-demo</a></p>
+<p>为了真正做到数据库的真实存取，于是又开始入门了 node+express+mongoose 、并以此来为之前的vue页面写后台数据接口。</p>
+<p>本文涉及的源码： <a href="https://github.com/gjincai/vue-node-proj" target="_blank" rel="external">vue-node-proj</a></p>
+<h2 id="基本数据模型-schema"><a href="#基本数据模型-schema" class="headerlink" title="基本数据模型 schema"></a>基本数据模型 schema</h2><blockquote>
+<p>以下涉及到mongodb操作的前提，是要配置好mongodb环境的；<br>mongodb 的安装配置、mongoose 的基本使用，请参考 <a href="http://gjincai.github.io/categories/mongodb/">http://gjincai.github.io/categories/mongodb/</a></p>
+</blockquote>
+<p>mongodb 主要建了3个数据模型：</p>
+<ol>
+<li><strong>用户信息数据结构</strong>：主要包含：用户名(手机)、密码、注册时间</li>
+<li><strong>商品信息数据结构</strong>：主要是该商品的信息，<code>brand_id</code>是唯一标识、<code>brand_cate</code>是商品分类(男装、女装…)</li>
+<li><strong>购物车信息数据结构</strong>：购物车商品的大部分字段跟商品信息相同；主要通过<code>name</code>字段将<code>用户</code>与<code>该用户购物车信息</code>联系起来；<code>cart_num、cart_isSelect</code>分别为该商品购物车中的数量、是否打钩选中状态。<br>详情如下：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 用户信息的数据结构模型</span></div><div class="line"><span class="keyword">const</span> userSchema = <span class="keyword">new</span> Schema(&#123;</div><div class="line">  <span class="attr">name</span>: &#123;<span class="attr">type</span>: <span class="built_in">String</span>&#125;,</div><div class="line">  <span class="attr">pwd</span>: &#123;<span class="attr">type</span>: <span class="built_in">String</span>&#125;,</div><div class="line">  <span class="attr">time</span>: &#123;<span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now&#125;</div><div class="line">&#125;)</div><div class="line"><span class="comment">// 商品的数据结构模型</span></div><div class="line"><span class="keyword">const</span> goodsSchema = <span class="keyword">new</span> Schema(&#123;</div><div class="line">  <span class="attr">brand_id</span>: <span class="built_in">Number</span>,</div><div class="line">  <span class="attr">brand_cate</span>: <span class="built_in">String</span>,</div><div class="line">  <span class="attr">brand_cateName</span>: <span class="built_in">String</span>,</div><div class="line">  <span class="attr">brand_status</span>: <span class="built_in">String</span>,</div><div class="line">  <span class="attr">brand_name</span>: <span class="built_in">String</span>,</div><div class="line">  <span class="attr">brand_price</span>: <span class="built_in">Number</span>,</div><div class="line">  <span class="attr">brand_desc</span>: <span class="built_in">String</span>,</div><div class="line">  <span class="attr">brand_pic</span>: <span class="built_in">String</span></div><div class="line">&#125;)</div><div class="line"><span class="comment">// 购物车的的数据结构模型</span></div><div class="line"><span class="keyword">const</span> cartsSchema = <span class="keyword">new</span> Schema(&#123;</div><div class="line">  <span class="attr">name</span>: <span class="built_in">String</span>,</div><div class="line">  <span class="attr">brand_id</span>: <span class="built_in">Number</span>,</div><div class="line">  <span class="attr">brand_cate</span>: <span class="built_in">String</span>,</div><div class="line">  <span class="attr">brand_name</span>: <span class="built_in">String</span>,</div><div class="line">  <span class="attr">brand_price</span>: <span class="built_in">Number</span>,</div><div class="line">  <span class="attr">brand_desc</span>: <span class="built_in">String</span>,</div><div class="line">  <span class="attr">brand_pic</span>: <span class="built_in">String</span>,</div><div class="line">  <span class="attr">cart_num</span>: <span class="built_in">Number</span>,</div><div class="line">  <span class="attr">cart_isSelect</span>: <span class="built_in">Boolean</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><p>开始连接数据库，当数据库 <code>test_nodeVue</code> 不存在时，会自动创建以此为名字的mongodb数据库。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> database = mongoose.connect(<span class="string">'mongodb://127.0.0.1:27017/test_nodeVue'</span>)</div><div class="line">database.connection.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'数据库test_nodeVue连接失败：'</span> + error)</div><div class="line">  <span class="keyword">return</span></div><div class="line">&#125;)</div><div class="line">database.connection.once(<span class="string">'open'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'数据库test_nodeVue连接成功'</span>)</div><div class="line">  <span class="comment">// 初始化数据库</span></div><div class="line">  initData();</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="初始化数据库"><a href="#初始化数据库" class="headerlink" title="初始化数据库"></a>初始化数据库</h2><p>连接数据库，当首次连接的时候、数据库还是空的；<br>当成功连接上数据库的时候，先查询数据库是否为空；若空则往数据库里插入初始化的商品数据（initGoods.json）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> initData = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">// 初始化商品goods</span></div><div class="line">  db.goodsModel.find(&#123;&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err, doc</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span> (err) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'initData出错：'</span> + err);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!doc.length) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'db goodsModel open first time'</span>);</div><div class="line">      <span class="comment">// 初始化数据，遍历插入</span></div><div class="line">      initGoods.map(<span class="function"><span class="params">brand</span> =&gt;</span> &#123;</div><div class="line">        db.goodsModel.create(brand)</div><div class="line">      &#125;)</div><div class="line">      <span class="comment">// console.log(initGoods)</span></div><div class="line"></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'db open not first time'</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="数据的更新-update"><a href="#数据的更新-update" class="headerlink" title="数据的更新 update"></a>数据的更新 update</h2><p>mongoose 数据增删查改的基本操作，详情参考：<a href="https://github.com/gjincai/vue-node-proj/blob/master/server/api.js" target="_blank" rel="external">源码</a><br>这里主要说一下 <code>update</code>:<br>参数：<code>testModel.update(conditionsObj, updateObj, upsert, function(){})</code><br>conditionsObj：查询条件<br>updateObj：需要更新的内容<br>upsert：当conditionsObj存在，则更新；不存在，则以conditionsObj、upsert为基础创建</p>
+<p>eg：加入购物车的时候，需要根据<code>用户名</code>及<code>商品id</code>判断该商品是否已经存在于用户的购物车里面；若存在，则更新；不存在，则新建：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// api addToCart</span></div><div class="line">app.get(<span class="string">'/api/goods/addToCart'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> brand_id = req.query.brand_id</div><div class="line">  <span class="keyword">let</span> name = req.query.name</div><div class="line">  <span class="keyword">let</span> newCart = req.query</div><div class="line">  db.cartsModel.update(&#123;<span class="attr">brand_id</span>: brand_id, <span class="attr">name</span>: name&#125;, &#123;<span class="attr">$set</span>:newCart&#125;, &#123;<span class="attr">upsert</span>:<span class="literal">true</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span> (err) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'加入购物车失败：'</span> + err);</div><div class="line">      res.json(&#123;<span class="attr">code</span>: <span class="number">700</span>, <span class="attr">msg</span>:<span class="string">'加入购物车失败：'</span> + err&#125;)</div><div class="line">      <span class="keyword">return</span></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="comment">// add</span></div><div class="line">      res.json(&#123;<span class="attr">code</span>: <span class="number">200</span>, <span class="attr">msg</span>:<span class="string">'加入购物车成功'</span>&#125;)</div><div class="line">      <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="vue-cli-跨域请求配置"><a href="#vue-cli-跨域请求配置" class="headerlink" title="vue-cli 跨域请求配置"></a>vue-cli 跨域请求配置</h2><p>前端vue项目的开发环境dev地址: <code>localhost:8080</code>,<br>后台node服务器的访问地址是: <code>127.0.0.1:8889</code>,<br>(本地开启的mongodb服务的地址是: <code>127.0.0.1:27017</code>)</p>
+<p>当前端与后台进行数据交互时，自然就出现跨域问题。<br>通过在前端修改 vue-cli 的配置可解决：<br><strong>vue-cli中的 <code>client/config/index.js</code> 下配置 dev选项的 {proxyTable}</strong>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">proxyTable: &#123;</div><div class="line">  <span class="comment">// proxy all requests starting with /api to jsonplaceholder</span></div><div class="line">  <span class="string">'/api'</span>: &#123;</div><div class="line">    <span class="attr">target</span>: <span class="string">'http://127.0.0.1:8889/api'</span>,</div><div class="line">    <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">pathRewrite</span>: &#123;</div><div class="line">      <span class="string">'^/api'</span>: <span class="string">''</span>  <span class="comment">// 若target中没有/api、这里又为空，则404；</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后，eg 在请求商品详情时:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.$http(&#123;</div><div class="line">  <span class="attr">url</span>: <span class="string">'/api/goods/detail'</span>,</div><div class="line">  <span class="attr">method</span>: <span class="string">'GET'</span>,</div><div class="line">  <span class="attr">params</span>: &#123;</div><div class="line">    <span class="attr">brand_id</span>: <span class="keyword">this</span>.$route.params.id</div><div class="line">  &#125;</div><div class="line">&#125;)</div><div class="line">  .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">    <span class="comment">// doSomething</span></div><div class="line">  &#125;)</div></pre></td></tr></table></figure>
+<p>这里的请求url <code>/api/goods/detail</code>、对应的真实请求地址是 <code>http://127.0.0.1:8889/api/goods/detail</code>。</p>
+<p>proxy的官网文档: <a href="https://vuejs-templates.github.io/webpack/proxy.html" target="_blank" rel="external">https://vuejs-templates.github.io/webpack/proxy.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mongodb/" rel="tag">#mongodb</a>
+          
+            <a href="/tags/node/" rel="tag">#node</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/19/mongoose的基本使用/" rel="next" title="mongoose的基本使用">
+                <i class="fa fa-chevron-left"></i> mongoose的基本使用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/07/26/express-mongoose-实现简易后台数据接口/"
+           data-title="express+mongoose 实现简易后台数据接口" data-url="http://gjincai.github.io/2017/07/26/express-mongoose-实现简易后台数据接口/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Guojc" />
+          <p class="site-author-name" itemprop="name">Guojc</p>
+          <p class="site-description motion-element" itemprop="description">Front-End</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gjincai" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3891598477/profile?topnav=1&wvr=6&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本数据模型-schema"><span class="nav-number">1.</span> <span class="nav-text">基本数据模型 schema</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接数据库"><span class="nav-number">2.</span> <span class="nav-text">连接数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化数据库"><span class="nav-number">3.</span> <span class="nav-text">初始化数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据的更新-update"><span class="nav-number">4.</span> <span class="nav-text">数据的更新 update</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-cli-跨域请求配置"><span class="nav-number">5.</span> <span class="nav-text">vue-cli 跨域请求配置</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guojc</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gjincai"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("8Dkd17xtByuuhGQS9Np4A3V5-gzGzoHsz", "NkoriNyqwzWTzvEIXqTEYWbb");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+</body>
+</html>
