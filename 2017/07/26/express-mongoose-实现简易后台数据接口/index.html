@@ -61,8 +61,8 @@
 <meta name="keywords" content="mongodb,vue,mongoose">
 <meta property="og:type" content="article">
 <meta property="og:title" content="express+mongoose 实现简易后台数据接口">
-<meta property="og:url" content="http://gjincai.github.io/2017/07/26/express-mongoose-实现简易后台数据接口/index.html">
-<meta property="og:site_name" content="Gjincai">
+<meta property="og:url" content="http://flydoing.github.io/2017/07/26/express-mongoose-实现简易后台数据接口/index.html">
+<meta property="og:site_name" content="Flydoing">
 <meta property="og:description" content="之前刚入门vue并做好了一个简而全的纯vue2全家桶的项目，数据都是本地 json 模拟请求的；详情请移步这里：vue-proj-demo 为了真正做到数据库的真实存取，于是又开始入门了 node+express+mongoose 、并以此来为之前的vue页面写后台数据接口。 本文涉及的源码： vue-node-proj 基本数据模型 schema 以下涉及到mongodb操作的前提，是要配置好m">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-10-18T09:27:26.000Z">
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title> express+mongoose 实现简易后台数据接口 | Gjincai </title>
+  <title> express+mongoose 实现简易后台数据接口 | Flydoing </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -115,7 +115,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Gjincai</span>
+      <span class="site-title">Flydoing</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -322,11 +322,11 @@
       
 
       
-        <p>之前刚入门vue并做好了一个简而全的纯vue2全家桶的项目，数据都是本地 json 模拟请求的；详情请移步这里：<a href="https://github.com/gjincai/vue-proj-demo" target="_blank" rel="external">vue-proj-demo</a></p>
+        <p>之前刚入门vue并做好了一个简而全的纯vue2全家桶的项目，数据都是本地 json 模拟请求的；详情请移步这里：<a href="https://github.com/flydoing/vue-proj-demo" target="_blank" rel="external">vue-proj-demo</a></p>
 <p>为了真正做到数据库的真实存取，于是又开始入门了 node+express+mongoose 、并以此来为之前的vue页面写后台数据接口。</p>
-<p>本文涉及的源码： <a href="https://github.com/gjincai/vue-node-proj" target="_blank" rel="external">vue-node-proj</a></p>
+<p>本文涉及的源码： <a href="https://github.com/flydoing/vue-node-proj" target="_blank" rel="external">vue-node-proj</a></p>
 <h2 id="基本数据模型-schema"><a href="#基本数据模型-schema" class="headerlink" title="基本数据模型 schema"></a>基本数据模型 schema</h2><blockquote>
-<p>以下涉及到mongodb操作的前提，是要配置好mongodb环境的；<br>mongodb 的安装配置、mongoose 的基本使用，请参考 <a href="http://gjincai.github.io/categories/mongodb/">http://gjincai.github.io/categories/mongodb/</a></p>
+<p>以下涉及到mongodb操作的前提，是要配置好mongodb环境的；<br>mongodb 的安装配置、mongoose 的基本使用，请参考 <a href="http://flydoing.github.io/categories/mongodb/">http://flydoing.github.io/categories/mongodb/</a></p>
 </blockquote>
 <p>mongodb 主要建了3个数据模型：</p>
 <ol>
@@ -339,7 +339,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> database = mongoose.connect(<span class="string">'mongodb://127.0.0.1:27017/test_nodeVue'</span>)</div><div class="line">database.connection.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'数据库test_nodeVue连接失败：'</span> + error)</div><div class="line">  <span class="keyword">return</span></div><div class="line">&#125;)</div><div class="line">database.connection.once(<span class="string">'open'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'数据库test_nodeVue连接成功'</span>)</div><div class="line">  <span class="comment">// 初始化数据库</span></div><div class="line">  initData();</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <h2 id="初始化数据库"><a href="#初始化数据库" class="headerlink" title="初始化数据库"></a>初始化数据库</h2><p>连接数据库，当首次连接的时候、数据库还是空的；<br>当成功连接上数据库的时候，先查询数据库是否为空；若空则往数据库里插入初始化的商品数据（initGoods.json）。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> initData = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">// 初始化商品goods</span></div><div class="line">  db.goodsModel.find(&#123;&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err, doc</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span> (err) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'initData出错：'</span> + err);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!doc.length) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'db goodsModel open first time'</span>);</div><div class="line">      <span class="comment">// 初始化数据，遍历插入</span></div><div class="line">      initGoods.map(<span class="function"><span class="params">brand</span> =&gt;</span> &#123;</div><div class="line">        db.goodsModel.create(brand)</div><div class="line">      &#125;)</div><div class="line">      <span class="comment">// console.log(initGoods)</span></div><div class="line"></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'db open not first time'</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="数据的更新-update"><a href="#数据的更新-update" class="headerlink" title="数据的更新 update"></a>数据的更新 update</h2><p>mongoose 数据增删查改的基本操作，详情参考：<a href="https://github.com/gjincai/vue-node-proj/blob/master/server/api.js" target="_blank" rel="external">源码</a><br>这里主要说一下 <code>update</code>:<br>参数：<code>testModel.update(conditionsObj, updateObj, upsert, function(){})</code><br>conditionsObj：查询条件<br>updateObj：需要更新的内容<br>upsert：当conditionsObj存在，则更新；不存在，则以conditionsObj、upsert为基础创建</p>
+<h2 id="数据的更新-update"><a href="#数据的更新-update" class="headerlink" title="数据的更新 update"></a>数据的更新 update</h2><p>mongoose 数据增删查改的基本操作，详情参考：<a href="https://github.com/flydoing/vue-node-proj/blob/master/server/api.js" target="_blank" rel="external">源码</a><br>这里主要说一下 <code>update</code>:<br>参数：<code>testModel.update(conditionsObj, updateObj, upsert, function(){})</code><br>conditionsObj：查询条件<br>updateObj：需要更新的内容<br>upsert：当conditionsObj存在，则更新；不存在，则以conditionsObj、upsert为基础创建</p>
 <p>eg：加入购物车的时候，需要根据<code>用户名</code>及<code>商品id</code>判断该商品是否已经存在于用户的购物车里面；若存在，则更新；不存在，则新建：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// api addToCart</span></div><div class="line">app.get(<span class="string">'/api/goods/addToCart'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> brand_id = req.query.brand_id</div><div class="line">  <span class="keyword">let</span> name = req.query.name</div><div class="line">  <span class="keyword">let</span> newCart = req.query</div><div class="line">  db.cartsModel.update(&#123;<span class="attr">brand_id</span>: brand_id, <span class="attr">name</span>: name&#125;, &#123;<span class="attr">$set</span>:newCart&#125;, &#123;<span class="attr">upsert</span>:<span class="literal">true</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span> (err) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'加入购物车失败：'</span> + err);</div><div class="line">      res.json(&#123;<span class="attr">code</span>: <span class="number">700</span>, <span class="attr">msg</span>:<span class="string">'加入购物车失败：'</span> + err&#125;)</div><div class="line">      <span class="keyword">return</span></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="comment">// add</span></div><div class="line">      res.json(&#123;<span class="attr">code</span>: <span class="number">200</span>, <span class="attr">msg</span>:<span class="string">'加入购物车成功'</span>&#125;)</div><div class="line">      <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <h2 id="vue-cli-跨域请求配置"><a href="#vue-cli-跨域请求配置" class="headerlink" title="vue-cli 跨域请求配置"></a>vue-cli 跨域请求配置</h2><p>前端vue项目的开发环境dev地址: <code>localhost:8080</code>,<br>后台node服务器的访问地址是: <code>127.0.0.1:8889</code>,<br>(本地开启的mongodb服务的地址是: <code>127.0.0.1:27017</code>)</p>
@@ -416,7 +416,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2017/07/26/express-mongoose-实现简易后台数据接口/"
-           data-title="express+mongoose 实现简易后台数据接口" data-url="http://gjincai.github.io/2017/07/26/express-mongoose-实现简易后台数据接口/">
+           data-title="express+mongoose 实现简易后台数据接口" data-url="http://flydoing.github.io/2017/07/26/express-mongoose-实现简易后台数据接口/">
       </div>
     
   </div>
@@ -492,7 +492,7 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/gjincai" target="_blank">
+                <a href="https://github.com/flydoing" target="_blank">
                   
                     <i class="fa fa-github"></i> GitHub
                   
@@ -801,7 +801,7 @@
   
 
   <script type="text/javascript">
-    var duoshuoQuery = {short_name:"gjincai"};
+    var duoshuoQuery = {short_name:"flydoing"};
     (function() {
       var ds = document.createElement('script');
       ds.type = 'text/javascript';ds.async = true;

@@ -61,8 +61,8 @@
 <meta name="keywords" content="react,jsx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="react入门笔记（一）基础结构">
-<meta property="og:url" content="http://gjincai.github.io/2016/08/10/react入门笔记（一）基础结构/index.html">
-<meta property="og:site_name" content="Gjincai">
+<meta property="og:url" content="http://flydoing.github.io/2016/08/10/react入门笔记（一）基础结构/index.html">
+<meta property="og:site_name" content="Flydoing">
 <meta property="og:description" content="react.js什么特点，怎样地好，这里就不多说。直接开篇入门学习吧，路漫漫其修远兮。  官网地址：React: A JAVASCRIPT LIBRARY FOR BUILDING USER INTERFACES 本文中的代码地址：demo1 基础结构说起什么也不急说，先从 “hello word!” 的 index.html 一个实例说起： 12345678910111213141516171">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-01-10T15:44:07.000Z">
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title> react入门笔记（一）基础结构 | Gjincai </title>
+  <title> react入门笔记（一）基础结构 | Flydoing </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -115,7 +115,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Gjincai</span>
+      <span class="site-title">Flydoing</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -326,7 +326,7 @@
 <p>react.js什么特点，怎样地好，这里就不多说。直接开篇入门学习吧，路漫漫其修远兮。</p>
 </blockquote>
 <p>官网地址：<a href="https://facebook.github.io/react/index.html" target="_blank" rel="external">React: A JAVASCRIPT LIBRARY FOR BUILDING USER INTERFACES</a></p>
-<p>本文中的代码地址：<a href="https://github.com/gjincai/react.js_learn" target="_blank" rel="external">demo1</a></p>
+<p>本文中的代码地址：<a href="https://github.com/flydoing/react.js_learn" target="_blank" rel="external">demo1</a></p>
 <h2 id="基础结构说起"><a href="#基础结构说起" class="headerlink" title="基础结构说起"></a>基础结构说起</h2><p>什么也不急说，先从 <code>“hello word!”</code> 的 <code>index.html</code> 一个实例说起：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>hello react.js<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../build/react.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../build/react-dom.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../build/browser.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- &lt;script src="index.js" type="text/babel"&gt;&lt;/script&gt; --&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="css">    <span class="selector-class">.red</span>&#123;</span></div><div class="line"><span class="undefined">      color: red;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"jc"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript">  <span class="keyword">var</span> Hello = React.createClass(&#123;</span></div><div class="line"><span class="javascript">    render:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></div><div class="line"><span class="javascript">      <span class="comment">//1、行内样式</span></span></div><div class="line"><span class="xml">      // return <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&#123;&#123;color:</span>'<span class="attr">red</span>'&#125;&#125;&gt;</span>hello &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span>;</span></div><div class="line"><span class="javascript">      <span class="comment">//2、class样式</span></span></div><div class="line"><span class="xml">      // return <span class="tag">&lt;<span class="name">span</span> <span class="attr">className</span>=<span class="string">'red'</span>&gt;</span>hello &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span>;</span></div><div class="line"><span class="javascript">      <span class="comment">//3、对象变量</span></span></div><div class="line"><span class="javascript">      <span class="keyword">var</span> styleSpan = &#123;</span></div><div class="line"><span class="javascript">        color: <span class="string">'yellow'</span>,</span></div><div class="line"><span class="javascript">        fontSize: <span class="string">'30px'</span>,</span></div><div class="line"><span class="javascript">        fontWeight: <span class="string">'bold'</span></span></div><div class="line"><span class="undefined">      &#125;</span></div><div class="line"><span class="javascript">      <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">&#123;styleSpan&#125;</span>&gt;</span>hello &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span>;</span></div><div class="line"><span class="undefined">    &#125;</span></div><div class="line"><span class="undefined">  &#125;);</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="javascript">  ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">Hello</span> <span class="attr">name</span>=<span class="string">'react'</span>/&gt;</span>,document.getElementById('jc'));</span></span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="结构解剖"><a href="#结构解剖" class="headerlink" title="结构解剖"></a>结构解剖</h2><p>对以上的结构进行一一解剖：</p>
@@ -351,7 +351,7 @@
 <li><code>ReactDOM.render</code>、<code>React.render</code> 这俩有啥区别？<br><code>React 0.14</code>之后，<code>react package</code> 一分为二：<code>react</code> 、<code>react-dom</code>；<br>其中，<br><code>react</code> 包含：<code>React.createElement、 .createClass、 .Component， .PropTypes， .Children</code>；<br><code>react-dom</code> 包含：<code>ReactDOM.render、 .unmountComponentAtNode、 .findDOMNode</code>。</li>
 </ol>
 <p>不断地做实例demo，从中才会深入理解、收货喜悦哦！！！</p>
-<p>本文中的代码地址：<a href="https://github.com/gjincai/react.js_learn" target="_blank" rel="external">demo1</a></p>
+<p>本文中的代码地址：<a href="https://github.com/flydoing/react.js_learn" target="_blank" rel="external">demo1</a></p>
 
       
     </div>
@@ -412,7 +412,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/08/10/react入门笔记（一）基础结构/"
-           data-title="react入门笔记（一）基础结构" data-url="http://gjincai.github.io/2016/08/10/react入门笔记（一）基础结构/">
+           data-title="react入门笔记（一）基础结构" data-url="http://flydoing.github.io/2016/08/10/react入门笔记（一）基础结构/">
       </div>
     
   </div>
@@ -488,7 +488,7 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/gjincai" target="_blank">
+                <a href="https://github.com/flydoing" target="_blank">
                   
                     <i class="fa fa-github"></i> GitHub
                   
@@ -797,7 +797,7 @@
   
 
   <script type="text/javascript">
-    var duoshuoQuery = {short_name:"gjincai"};
+    var duoshuoQuery = {short_name:"flydoing"};
     (function() {
       var ds = document.createElement('script');
       ds.type = 'text/javascript';ds.async = true;

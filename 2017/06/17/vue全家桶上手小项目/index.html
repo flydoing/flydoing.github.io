@@ -61,8 +61,8 @@
 <meta name="keywords" content="vue,vue2,vue项目">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue全家桶上手小项目">
-<meta property="og:url" content="http://gjincai.github.io/2017/06/17/vue全家桶上手小项目/index.html">
-<meta property="og:site_name" content="Gjincai">
+<meta property="og:url" content="http://flydoing.github.io/2017/06/17/vue全家桶上手小项目/index.html">
+<meta property="og:site_name" content="Flydoing">
 <meta property="og:description" content="本文源码 实现功能主要用到的技术：vue-cli + vue2 + vue-router2 + vuex2 + axios + es6 + sass + eslint 主要实现的功能：页面的数据通过 axios 模拟请求本地的 json 文件获得；vue-router2 实现各页面的相互跳转；vuex2 全局状态的管理，如头部导航的标题内容，侧栏的显示状态；简易购物车功能，详情页加入购物车的商品，">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-06-17T11:45:22.000Z">
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title> vue全家桶上手小项目 | Gjincai </title>
+  <title> vue全家桶上手小项目 | Flydoing </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -115,7 +115,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Gjincai</span>
+      <span class="site-title">Flydoing</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -322,7 +322,7 @@
       
 
       
-        <p><a href="https://github.com/gjincai/vue-proj-demo" target="_blank" rel="external">本文源码</a></p>
+        <p><a href="https://github.com/flydoing/vue-proj-demo" target="_blank" rel="external">本文源码</a></p>
 <h2 id="实现功能"><a href="#实现功能" class="headerlink" title="实现功能"></a>实现功能</h2><p><strong>主要用到的技术：</strong><br><code>vue-cli + vue2 + vue-router2 + vuex2 + axios + es6 + sass + eslint</code></p>
 <p><strong>主要实现的功能：</strong><br>页面的数据通过 axios 模拟请求本地的 json 文件获得；<br>vue-router2 实现各页面的相互跳转；<br>vuex2 全局状态的管理，如头部导航的标题内容，侧栏的显示状态；<br>简易购物车功能，详情页加入购物车的商品，随机生成单价、商品名字；<br>购物车的信息通过localstorage存储在本地；<br>注册登录的信息也是通过localstorage存储在本地。</p>
 <h2 id="项目目录结构"><a href="#项目目录结构" class="headerlink" title="项目目录结构"></a>项目目录结构</h2><p>proj5-shop 目录结构，主要看src目录和static目录的：</p>
@@ -357,7 +357,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// cate/detail.vue</span></div><div class="line">data () &#123;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    detailData: &#123;</div><div class="line">      id: <span class="number">100048</span>,</div><div class="line">      type: <span class="string">'type_man'</span>,</div><div class="line">      isSelect: <span class="literal">true</span>,</div><div class="line">      cart_img: <span class="string">'http://ohe5avf3y.bkt.clouddn.com/pro/vue/vue-shop/vue-proj-goods.jpg'</span>,</div><div class="line">      cart_name: <span class="string">'商品名字'</span> + <span class="keyword">this</span>.getRandom(<span class="number">10</span>, <span class="number">100</span>),</div><div class="line">      cart_num: <span class="number">1</span>,</div><div class="line">      cart_price: <span class="keyword">this</span>.getRandom(<span class="number">10</span>, <span class="number">100</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>点击 <code>加入购物车</code>，实际就是将该商品的 data 信息加入到 localStorage 的本地存储中；这里主要用到一个自己定义的 <code>localDB.js</code> ：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">todoDb</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span> (name) &#123;</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">    <span class="keyword">if</span> (<span class="built_in">JSON</span>.stringify(<span class="keyword">this</span>.get(<span class="keyword">this</span>.name)) === <span class="string">'&#123;&#125;'</span>) &#123;</div><div class="line">      <span class="keyword">this</span>.set([])</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  set (val) &#123;</div><div class="line">    <span class="built_in">window</span>.localStorage.setItem(<span class="keyword">this</span>.name, <span class="built_in">JSON</span>.stringify(val))</div><div class="line">  &#125;</div><div class="line">  get () &#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">JSON</span>.parse(<span class="built_in">window</span>.localStorage.getItem(<span class="keyword">this</span>.name)) || &#123;&#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>购物车 <code>cart/cart.vue</code> 主要思路就是：读取本地存储购物车中的localStorage 所有产品信息并显示出来；根据用户增删操作、来更新本地购物车存储的产品信息。<br>具体的实现直接看 <a href="https://github.com/gjincai/vue-proj-demo/blob/master/proj5-shop/src/components/cart/cart.vue" target="_blank" rel="external">购物车源码</a>。</p>
+<p>购物车 <code>cart/cart.vue</code> 主要思路就是：读取本地存储购物车中的localStorage 所有产品信息并显示出来；根据用户增删操作、来更新本地购物车存储的产品信息。<br>具体的实现直接看 <a href="https://github.com/flydoing/vue-proj-demo/blob/master/proj5-shop/src/components/cart/cart.vue" target="_blank" rel="external">购物车源码</a>。</p>
 <h3 id="注册登录"><a href="#注册登录" class="headerlink" title="注册登录"></a>注册登录</h3><p>注册登录的用户中心页面 <code>center/center.vue</code>，主要是控制三种状态的显示与隐藏：登录、注册、登录成功后的用户中心，主要是data里面的 showState ；<br>还有就是表单数据的一些绑定验证，主要是data里面的 dataLogin 。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"mobile"</span> <span class="attr">type</span>=<span class="string">"tel"</span> <span class="attr">placeholder</span>=<span class="string">"请输入手机号"</span> <span class="attr">maxlength</span>=<span class="string">"11"</span> <span class="attr">v-model</span>=<span class="string">"dataLogin.name"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">type</span>=<span class="string">"tel"</span> <span class="attr">placeholder</span>=<span class="string">"请输入密码"</span> <span class="attr">maxlength</span>=<span class="string">"6"</span> <span class="attr">v-model</span>=<span class="string">"dataLogin.pass"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="undefined">data () &#123;</span></div><div class="line"><span class="javascript">  <span class="keyword">return</span> &#123;</span></div><div class="line"><span class="javascript">    tips: <span class="string">''</span>,</span></div><div class="line"><span class="javascript">    showState: <span class="string">'logined'</span>,</span></div><div class="line"><span class="undefined">    dataLogin: &#123;</span></div><div class="line"><span class="javascript">      name: <span class="string">''</span>,</span></div><div class="line"><span class="javascript">      pass: <span class="string">''</span>,</span></div><div class="line"><span class="javascript">      code: <span class="string">''</span></span></div><div class="line"><span class="undefined">    &#125;,</span></div><div class="line"><span class="javascript">    <span class="comment">// showState: 'register'</span></span></div><div class="line"><span class="javascript">    <span class="comment">// showState: 'logining'</span></span></div><div class="line"><span class="undefined">  &#125;</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>详情看github源码中的 <code>center/center.vue</code>。</p>
@@ -372,7 +372,7 @@
 <p><strong>判断对象为空</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> myObj == <span class="string">"undefined"</span>) &#123;</div><div class="line">　<span class="keyword">var</span> myObj = &#123;&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>webstorm卡顿</strong><br>webstorm 需要把 node_models 文件夹排除掉（exclued），不然很卡顿。</p>
-<p>目前正学习node+mongodb，准备以此取代该项目中模拟的本地数据请求和localStorage，项目代码：<a href="https://github.com/gjincai/vue-node-proj" target="_blank" rel="external">https://github.com/gjincai/vue-node-proj</a></p>
+<p>目前正学习node+mongodb，准备以此取代该项目中模拟的本地数据请求和localStorage，项目代码：<a href="https://github.com/flydoing/vue-node-proj" target="_blank" rel="external">https://github.com/flydoing/vue-node-proj</a></p>
 
       
     </div>
@@ -433,7 +433,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2017/06/17/vue全家桶上手小项目/"
-           data-title="vue全家桶上手小项目" data-url="http://gjincai.github.io/2017/06/17/vue全家桶上手小项目/">
+           data-title="vue全家桶上手小项目" data-url="http://flydoing.github.io/2017/06/17/vue全家桶上手小项目/">
       </div>
     
   </div>
@@ -509,7 +509,7 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/gjincai" target="_blank">
+                <a href="https://github.com/flydoing" target="_blank">
                   
                     <i class="fa fa-github"></i> GitHub
                   
@@ -818,7 +818,7 @@
   
 
   <script type="text/javascript">
-    var duoshuoQuery = {short_name:"gjincai"};
+    var duoshuoQuery = {short_name:"flydoing"};
     (function() {
       var ds = document.createElement('script');
       ds.type = 'text/javascript';ds.async = true;

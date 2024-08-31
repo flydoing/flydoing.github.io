@@ -61,8 +61,8 @@
 <meta name="keywords" content="wap手机网站,项目总结,前端技术栈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="wap手机小站开发总结">
-<meta property="og:url" content="http://gjincai.github.io/2017/01/11/wap手机小站开发总结/index.html">
-<meta property="og:site_name" content="Gjincai">
+<meta property="og:url" content="http://flydoing.github.io/2017/01/11/wap手机小站开发总结/index.html">
+<meta property="og:site_name" content="Flydoing">
 <meta property="og:description" content="近期完成的一个 wap手机小站 ，过后稍微总结一下。  思考如今，angular/react/vue 的大热，使得 jquery 即将退去的形势变得更为明朗。思考一番，倘若如今摒弃了 jquery 、哪个框架会更合适自己目前的项目呢？当下的这个wap手机小站，大量的ajax数据进行前后交互，这不就是 SPA 单页面应用的趋势么？结合近期正在学到的 react-router ,觉得到时有必要将该">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-01-11T14:05:25.000Z">
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title> wap手机小站开发总结 | Gjincai </title>
+  <title> wap手机小站开发总结 | Flydoing </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -115,7 +115,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Gjincai</span>
+      <span class="site-title">Flydoing</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -349,7 +349,7 @@
 <h2 id="sass-rem-emmet-cssrem"><a href="#sass-rem-emmet-cssrem" class="headerlink" title="sass/rem/emmet/cssrem"></a>sass/rem/emmet/cssrem</h2><p>gulp插件 <code>gulp-sourcemaps</code> 将压缩过的 js/css文件 映射到对应的尚未压缩过的 js/sass 文件,在调试中快速定位代码的位置、进行高效调试。<br><code>sass</code> 嵌套带来的一个调试问题：css/sass 的行数定位、一般是定位到元素前的，比如：</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.parent</span>&#123;</div><div class="line">    <span class="attribute">position</span>:relative;</div><div class="line">    <span class="selector-class">.child</span>&#123;</div><div class="line">        <span class="attribute">width</span>:<span class="number">100px</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>以上代码中，假如我们要快速定位到设置 <code>.child</code> 的 width 值的<em>第四行</em>，但是 <code>gulp-sourcemaps</code> 为我们定位到的只是 <code>.parent</code> 处的<em>第一行</em>。<br>当嵌套过深时，定位的偏差就会越大。适度的嵌套可以既保持css的模块、又可方便调试的快速定位；一般一个小组件为一个嵌套的css块。</p>
-<p>移动端的自适应摒弃了百分比的方式，采用了 <strong>rem</strong> 自适应做法（<a href="http://gjincai.github.io/tags/web%E7%A7%BB%E5%8A%A8%E5%89%8D%E7%AB%AF/">移动前端适配</a>）。<br>rem 与 px 的转换，写一个就自己计算一遍么？如此效率不能忍。<br>sublime 插件 <strong>cssrem/rem-unit</strong>均可实现 rem 与 px 自动转换。配置插件中 font-size 值为 40，然后你只管按照ui设计图的大小敲出px大小，cssrem/rem-unit 便会自动进行转换。</p>
+<p>移动端的自适应摒弃了百分比的方式，采用了 <strong>rem</strong> 自适应做法（<a href="http://flydoing.github.io/tags/web%E7%A7%BB%E5%8A%A8%E5%89%8D%E7%AB%AF/">移动前端适配</a>）。<br>rem 与 px 的转换，写一个就自己计算一遍么？如此效率不能忍。<br>sublime 插件 <strong>cssrem/rem-unit</strong>均可实现 rem 与 px 自动转换。配置插件中 font-size 值为 40，然后你只管按照ui设计图的大小敲出px大小，cssrem/rem-unit 便会自动进行转换。</p>
 <p>sublime 另一个插件 <strong>emmet</strong>，在写 html 时候会让人有飞一般的感觉。详见  <a href="http://docs.emmet.io/abbreviations/syntax/" target="_blank" rel="external">emmet语法</a></p>
 <h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p><strong>fiddler、photoshop、fastStoneCapture、apache、chrome、postman、svn、git bash、sublime plugins、phpStorm 等</strong><br>fiddler：将线上的 js/css 静态文件代理为本地对应的文件，堪称一绝；<br>apache： 开个本机的服务器，手机代理到电脑，真机测试（nginx也行）；<br>git bash：主要用来执行 gulp 任务。</p>
 <h2 id="一些坑"><a href="#一些坑" class="headerlink" title="一些坑"></a>一些坑</h2><ul>
@@ -436,7 +436,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2017/01/11/wap手机小站开发总结/"
-           data-title="wap手机小站开发总结" data-url="http://gjincai.github.io/2017/01/11/wap手机小站开发总结/">
+           data-title="wap手机小站开发总结" data-url="http://flydoing.github.io/2017/01/11/wap手机小站开发总结/">
       </div>
     
   </div>
@@ -512,7 +512,7 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/gjincai" target="_blank">
+                <a href="https://github.com/flydoing" target="_blank">
                   
                     <i class="fa fa-github"></i> GitHub
                   
@@ -821,7 +821,7 @@
   
 
   <script type="text/javascript">
-    var duoshuoQuery = {short_name:"gjincai"};
+    var duoshuoQuery = {short_name:"flydoing"};
     (function() {
       var ds = document.createElement('script');
       ds.type = 'text/javascript';ds.async = true;

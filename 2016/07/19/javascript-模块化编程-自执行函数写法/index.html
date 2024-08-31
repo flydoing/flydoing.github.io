@@ -61,8 +61,8 @@
 <meta name="keywords" content="javascript,自执行函数,模块化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="javascript 模块化编程-自执行函数写法">
-<meta property="og:url" content="http://gjincai.github.io/2016/07/19/javascript-模块化编程-自执行函数写法/index.html">
-<meta property="og:site_name" content="Gjincai">
+<meta property="og:url" content="http://flydoing.github.io/2016/07/19/javascript-模块化编程-自执行函数写法/index.html">
+<meta property="og:site_name" content="Flydoing">
 <meta property="og:description" content="紧接上一篇中，对js模块化编程里的面向对象编程的写法、改进为自执行函数的写法。  本文所介绍的完整js代码：github 面向对象写法上一篇中，面向对象的写法如下： 123456789101112//面向对象写法var Func=&amp;#123;    func1:function()&amp;#123;        console.log(&apos;func1&apos;);    &amp;#125;,    func2:fu">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-01-10T15:44:07.000Z">
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title> javascript 模块化编程-自执行函数写法 | Gjincai </title>
+  <title> javascript 模块化编程-自执行函数写法 | Flydoing </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -115,7 +115,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Gjincai</span>
+      <span class="site-title">Flydoing</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -325,15 +325,15 @@
         <blockquote>
 <p>紧接上一篇中，对js模块化编程里的<em>面向对象编程</em>的写法、改进为<em>自执行函数</em>的写法。</p>
 </blockquote>
-<p>本文所介绍的完整js代码：<a href="https://github.com/gjincai/learn-test-demo/tree/master/js_module_demo" target="_blank" rel="external">github</a></p>
+<p>本文所介绍的完整js代码：<a href="https://github.com/flydoing/learn-test-demo/tree/master/js_module_demo" target="_blank" rel="external">github</a></p>
 <h2 id="面向对象写法"><a href="#面向对象写法" class="headerlink" title="面向对象写法"></a>面向对象写法</h2><p>上一篇中，面向对象的写法如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//面向对象写法</span></div><div class="line"><span class="keyword">var</span> Func=&#123;</div><div class="line">    func1:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'func1'</span>);</div><div class="line">    &#125;,</div><div class="line">    func2:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'func2'</span>);</div><div class="line">    &#125;,</div><div class="line">    func3:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'func3'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <h2 id="自执行函数写法"><a href="#自执行函数写法" class="headerlink" title="自执行函数写法"></a>自执行函数写法</h2><p>将面向对象的写法改为自执行函数的写法后：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//自执行函数的写法</span></div><div class="line"><span class="keyword">var</span> Func = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> func1,</div><div class="line">      func2,</div><div class="line">      func3;</div><div class="line"></div><div class="line">  func1 = <span class="function"><span class="keyword">function</span>(<span class="params">html</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'func1'</span>);</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  func2 = <span class="function"><span class="keyword">function</span>(<span class="params">str,len</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'func1'</span>);</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  func3 = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'func1'</span>);</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    func1 : func1,</div><div class="line">    func2 : func2,</div><div class="line">    func3 : func3</div><div class="line">  &#125;;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
 <h2 id="整个js文件结构"><a href="#整个js文件结构" class="headerlink" title="整个js文件结构"></a>整个js文件结构</h2><p>自执行函数写法后的整个js文件结构如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//开头加上分好，避免js合并后相互影响</span></div><div class="line">;(<span class="function"><span class="keyword">function</span>(<span class="params">window, undefined</span>)</span>&#123;</div><div class="line">  <span class="comment">//一、定义全局数据</span></div><div class="line">  <span class="keyword">var</span> Data = <span class="string">''</span>;</div><div class="line"></div><div class="line">  <span class="comment">//二、首页JS功能</span></div><div class="line">  <span class="keyword">var</span> Index = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> init;</div><div class="line"></div><div class="line">    <span class="comment">//init初始化</span></div><div class="line">    init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      <span class="comment">//...</span></div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      init : init</div><div class="line">    &#125;;</div><div class="line">  &#125;)();</div><div class="line"></div><div class="line">  <span class="comment">//三、功能模块</span></div><div class="line">  <span class="keyword">var</span> Func = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> func1,</div><div class="line">        func2,</div><div class="line">        func3;</div><div class="line"></div><div class="line">    func1 = <span class="function"><span class="keyword">function</span>(<span class="params">html</span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'func1'</span>);</div><div class="line">    &#125;;</div><div class="line">    func2 = <span class="function"><span class="keyword">function</span>(<span class="params">str,len</span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'func1'</span>);</div><div class="line">    &#125;;</div><div class="line">    func3 = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'func1'</span>);</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      func1 : func1,</div><div class="line">      func2 : func2,</div><div class="line">      func3 : func3</div><div class="line">    &#125;;</div><div class="line">  &#125;)();</div><div class="line"></div><div class="line">  <span class="comment">//四、工具模块</span></div><div class="line">  <span class="keyword">var</span> Tool = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> tool1,</div><div class="line">        tool2,</div><div class="line">        tool3;</div><div class="line"></div><div class="line">    tool1 = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>)</span>&#123;</div><div class="line">      <span class="comment">//...</span></div><div class="line">    &#125;;</div><div class="line">    tool2 = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>)</span>&#123;</div><div class="line">      <span class="comment">//...</span></div><div class="line">    &#125;;</div><div class="line">    tool3 = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>)</span>&#123;</div><div class="line">      <span class="comment">//...</span></div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      tool1 : tool1,</div><div class="line">      tool2 : tool2,</div><div class="line">      tool3 : tool3</div><div class="line">    &#125;;</div><div class="line">  &#125;)();</div><div class="line"></div><div class="line">  <span class="comment">//五、执行入口</span></div><div class="line">  $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    Index.init();</div><div class="line">  &#125;);</div><div class="line">&#125;)(<span class="built_in">window</span>);</div></pre></td></tr></table></figure>
-<p>当然，以上说的js模块化编程，更多的只是在一个js文件中的模块化写法。<br>对于多个js文件之间的模块化，更多地是使用模块化工具 <code>sea.js</code>、<code>require.js</code>。<br>详情请参考之前写过的一篇学习文章 <a href="http://gjincai.github.io/2016/04/01/require-js-%E5%AE%9E%E4%BE%8B%E5%85%A5%E9%97%A8/">require.js 实例入门</a> ，这里就不重复了。</p>
-<p>本文所介绍的完整js代码：<a href="https://github.com/gjincai/learn-test-demo/tree/master/js_module_demo" target="_blank" rel="external">github</a></p>
+<p>当然，以上说的js模块化编程，更多的只是在一个js文件中的模块化写法。<br>对于多个js文件之间的模块化，更多地是使用模块化工具 <code>sea.js</code>、<code>require.js</code>。<br>详情请参考之前写过的一篇学习文章 <a href="http://flydoing.github.io/2016/04/01/require-js-%E5%AE%9E%E4%BE%8B%E5%85%A5%E9%97%A8/">require.js 实例入门</a> ，这里就不重复了。</p>
+<p>本文所介绍的完整js代码：<a href="https://github.com/flydoing/learn-test-demo/tree/master/js_module_demo" target="_blank" rel="external">github</a></p>
 
       
     </div>
@@ -394,7 +394,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/07/19/javascript-模块化编程-自执行函数写法/"
-           data-title="javascript 模块化编程-自执行函数写法" data-url="http://gjincai.github.io/2016/07/19/javascript-模块化编程-自执行函数写法/">
+           data-title="javascript 模块化编程-自执行函数写法" data-url="http://flydoing.github.io/2016/07/19/javascript-模块化编程-自执行函数写法/">
       </div>
     
   </div>
@@ -470,7 +470,7 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/gjincai" target="_blank">
+                <a href="https://github.com/flydoing" target="_blank">
                   
                     <i class="fa fa-github"></i> GitHub
                   
@@ -779,7 +779,7 @@
   
 
   <script type="text/javascript">
-    var duoshuoQuery = {short_name:"gjincai"};
+    var duoshuoQuery = {short_name:"flydoing"};
     (function() {
       var ds = document.createElement('script');
       ds.type = 'text/javascript';ds.async = true;

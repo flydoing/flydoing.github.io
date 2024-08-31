@@ -61,8 +61,8 @@
 <meta name="keywords" content="react,react实例">
 <meta property="og:type" content="article">
 <meta property="og:title" content="react入门笔记（二）demo实例学习">
-<meta property="og:url" content="http://gjincai.github.io/2016/08/13/react入门笔记（二）demo实例学习/index.html">
-<meta property="og:site_name" content="Gjincai">
+<meta property="og:url" content="http://flydoing.github.io/2016/08/13/react入门笔记（二）demo实例学习/index.html">
+<meta property="og:site_name" content="Flydoing">
 <meta property="og:description" content="之前浏览过并理解完了react的一些基础知识后，本文将开始一边写 demo 一边继续 react 的学习之旅。  react官网地址：React: A JAVASCRIPT LIBRARY FOR BUILDING USER INTERFACES 本文中的代码 github 地址：demo实例 demo的html模板本文中所有的 demo ，都采用以下这个 html 模板： 1234567891">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-01-10T15:44:07.000Z">
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title> react入门笔记（二）demo实例学习 | Gjincai </title>
+  <title> react入门笔记（二）demo实例学习 | Flydoing </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -115,7 +115,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Gjincai</span>
+      <span class="site-title">Flydoing</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -326,7 +326,7 @@
 <p>之前浏览过并理解完了react的一些基础知识后，本文将开始一边写 demo 一边继续 react 的学习之旅。</p>
 </blockquote>
 <p>react官网地址：<a href="https://facebook.github.io/react/index.html" target="_blank" rel="external">React: A JAVASCRIPT LIBRARY FOR BUILDING USER INTERFACES</a></p>
-<p>本文中的代码 github 地址：<a href="https://github.com/gjincai/react.js_learn" target="_blank" rel="external">demo实例</a></p>
+<p>本文中的代码 github 地址：<a href="https://github.com/flydoing/react.js_learn" target="_blank" rel="external">demo实例</a></p>
 <h2 id="demo的html模板"><a href="#demo的html模板" class="headerlink" title="demo的html模板"></a>demo的html模板</h2><p>本文中所有的 demo ，都采用以下这个 html 模板：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>react demo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../build/react.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../build/react-dom.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../build/browser.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"index.js"</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>  <span class="comment">&lt;!--引入的jsx文件--&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"jc"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- &lt;script type="text/babel"&gt;</span></div><div class="line"><span class="comment">  //jsx代码</span></div><div class="line"><span class="comment">&lt;/script&gt; --&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="demo2-数组变量"><a href="#demo2-数组变量" class="headerlink" title="demo2: 数组变量"></a>demo2: 数组变量</h2><p>如代码，当变量 <code>arrHtml</code> 是一个数组的时候，jsx 会自动遍历展开整个数组：</p>
@@ -341,7 +341,7 @@
 <h2 id="demo5-ref-ReactDOM-findDOMNode"><a href="#demo5-ref-ReactDOM-findDOMNode" class="headerlink" title="demo5: ref ReactDOM.findDOMNode"></a>demo5: ref ReactDOM.findDOMNode</h2><p><code>this.refs.[refName]</code> 属性获取的是真实 DOM；<br>首先需要设置 React 元素的 <code>ref</code> 属性，然后通过 <code>this.refs</code> 对象访问这个组件。<br>注意，旧版本的是<code>React.findDOMNode()</code>，新版本应该用<code>ReactDOM.findDOMNode()</code>，否则报错。</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> MyForm = React.createClass(&#123;</div><div class="line">   focusClick: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     <span class="comment">//this.refs.focusInput.focus();</span></div><div class="line">     <span class="comment">//this.refs.focusInput.value = '点击后生成的值';</span></div><div class="line">     <span class="comment">//React.findDOMNode(this.refs.focusInput).focus(); //is not a function...</span></div><div class="line">       ReactDOM.findDOMNode(<span class="keyword">this</span>.refs.focusInput).focus();</div><div class="line">       ReactDOM.findDOMNode(<span class="keyword">this</span>.refs.focusInput).value = <span class="string">'点击后生成的值'</span>;</div><div class="line">   &#125;,</div><div class="line">   render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     <span class="keyword">return</span> (</div><div class="line">       &lt;div&gt;</div><div class="line">         &lt;input type=<span class="string">'text'</span> ref=<span class="string">'focusInput'</span>/&gt;</div><div class="line">         &lt;a onClick=&#123;<span class="keyword">this</span>.focusClick&#125;&gt;点击focus&lt;<span class="regexp">/a&gt;</span></div><div class="line"><span class="regexp">       &lt;/</span>div&gt;</div><div class="line">     );</div><div class="line">   &#125;</div><div class="line"> &#125;);</div><div class="line"></div><div class="line"> ReactDOM.render(</div><div class="line">   &lt;MyForm /&gt;,</div><div class="line">   <span class="built_in">document</span>.getElementById(<span class="string">'jc'</span>)</div><div class="line"> );</div></pre></td></tr></table></figure>
 <p>更多学习demo，待续…</p>
-<p>本文中的代码 github 地址：<a href="https://github.com/gjincai/react.js_learn" target="_blank" rel="external">demo实例</a></p>
+<p>本文中的代码 github 地址：<a href="https://github.com/flydoing/react.js_learn" target="_blank" rel="external">demo实例</a></p>
 
       
     </div>
@@ -402,7 +402,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/08/13/react入门笔记（二）demo实例学习/"
-           data-title="react入门笔记（二）demo实例学习" data-url="http://gjincai.github.io/2016/08/13/react入门笔记（二）demo实例学习/">
+           data-title="react入门笔记（二）demo实例学习" data-url="http://flydoing.github.io/2016/08/13/react入门笔记（二）demo实例学习/">
       </div>
     
   </div>
@@ -478,7 +478,7 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/gjincai" target="_blank">
+                <a href="https://github.com/flydoing" target="_blank">
                   
                     <i class="fa fa-github"></i> GitHub
                   
@@ -787,7 +787,7 @@
   
 
   <script type="text/javascript">
-    var duoshuoQuery = {short_name:"gjincai"};
+    var duoshuoQuery = {short_name:"flydoing"};
     (function() {
       var ds = document.createElement('script');
       ds.type = 'text/javascript';ds.async = true;

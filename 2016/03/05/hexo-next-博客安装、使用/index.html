@@ -61,8 +61,8 @@
 <meta name="keywords" content="hexo安装,next,部署到github,ssh key">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo + next 博客安装、使用">
-<meta property="og:url" content="http://gjincai.github.io/2016/03/05/hexo-next-博客安装、使用/index.html">
-<meta property="og:site_name" content="Gjincai">
+<meta property="og:url" content="http://flydoing.github.io/2016/03/05/hexo-next-博客安装、使用/index.html">
+<meta property="og:site_name" content="Flydoing">
 <meta property="og:description" content="最近经常遇上了 hexo 主题的博客，心底痒痒的，于是自己也开始由之前的 WordPress个人博客 转向了 hexo 。过程的坑坑补补虽是郁闷，不过折腾过后还是感觉棒棒的。第一次正式使用 markdown 写文章，好像有点慢，幸好上手还是挺快的。  准备工作本次安装的 hexo 版本为 hexo 3.2.0 （git bash 下执行 hexo -v 可知），win10 的 64位 系统。首先">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-01-10T15:44:07.000Z">
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title> hexo + next 博客安装、使用 | Gjincai </title>
+  <title> hexo + next 博客安装、使用 | Flydoing </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -115,7 +115,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Gjincai</span>
+      <span class="site-title">Flydoing</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -354,7 +354,7 @@
 </li>
 </ol>
 <h2 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置 _config.yml"></a>配置 _config.yml</h2><p>用文本编辑器 <code>sublime text</code> 或 <code>txt</code> 打开 <code>hexo</code> 目录下的 <code>_config.yml</code> ，进行站点的信息配置。这里只挑一些常规的看看：<br>（详细请看 <a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="external">官方中文api</a>）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># Site</div><div class="line">title: Gjincai  #标题</div><div class="line">subtitle: 理性地过，感性地活    #副标题</div><div class="line">description: Front End  #描述</div><div class="line">author: guojc  #作者</div><div class="line">language: zh-Hans  #语言</div><div class="line">timezone:</div><div class="line"></div><div class="line"># Extensions</div><div class="line">## Plugins: https://hexo.io/plugins/</div><div class="line">## Themes: https://hexo.io/themes/</div><div class="line">theme: next #主题</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># Site</div><div class="line">title: Flydoing  #标题</div><div class="line">subtitle: 理性地过，感性地活    #副标题</div><div class="line">description: Front End  #描述</div><div class="line">author: guojc  #作者</div><div class="line">language: zh-Hans  #语言</div><div class="line">timezone:</div><div class="line"></div><div class="line"># Extensions</div><div class="line">## Plugins: https://hexo.io/plugins/</div><div class="line">## Themes: https://hexo.io/themes/</div><div class="line">theme: next #主题</div></pre></td></tr></table></figure>
 <h2 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h2><p>更多主题选择尽在 <a href="https://hexo.io/themes/" target="_blank" rel="external">官方主题</a>；<br>本站博客选择的主题是 <code>next</code> ，简明详细官方说明文档 <a href="http://theme-next.iissnan.com/five-minutes-setup.html" target="_blank" rel="external">5 分钟快速安装</a> 。</p>
 <p>官方说明文档已经好简明易懂的了，这里简单说一下个人使用时的一些情况：</p>
 <ul>
@@ -372,7 +372,7 @@
 <ol>
 <li>配置文件的修改、mardown 的编写， <code>: x</code> 冒号的后面切记有一个空格！！！</li>
 <li><p>社交链接图标全为地球形状时，注意主题文件夹下的 <code>_config.yml</code> 里、将 <code># Social links</code> 和 <code># Social Icons</code> 中的 <code>GitHub</code> <code>Weibo</code> 保持一致，包括大小写：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># Social links</div><div class="line">social:</div><div class="line">  GitHub: https://github.com/gjincai</div><div class="line">  Weibo: http://weibo.com/3891598477/profile?topnav=1&amp;wvr=6&amp;is_all=1</div><div class="line"></div><div class="line"># Social Icons</div><div class="line">    social_icons:</div><div class="line">        enable: true</div><div class="line">        GitHub: github</div><div class="line">        Weibo: weibo</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># Social links</div><div class="line">social:</div><div class="line">  GitHub: https://github.com/flydoing</div><div class="line">  Weibo: http://weibo.com/3891598477/profile?topnav=1&amp;wvr=6&amp;is_all=1</div><div class="line"></div><div class="line"># Social Icons</div><div class="line">    social_icons:</div><div class="line">        enable: true</div><div class="line">        GitHub: github</div><div class="line">        Weibo: weibo</div></pre></td></tr></table></figure>
 </li>
 </ol>
 </li>
@@ -380,7 +380,7 @@
 <h2 id="部署到-GitHub"><a href="#部署到-GitHub" class="headerlink" title="部署到 GitHub"></a><h2 id="h2-5">部署到 GitHub</h2></h2><ol>
 <li>到 <code>GitHub</code> 注册一个账号，记下注册名：<code>username</code> 和注册邮箱：<code>email@email.com</code> 。</li>
 <li><p>git config 配置<br> 打开 git 命令行、输入（注意改成你自己的 email 、username）：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.email &quot;1262868349@qq.com&quot;</div><div class="line">git config --global user.name &quot;gjincai&quot;</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.email &quot;1262868349@qq.com&quot;</div><div class="line">git config --global user.name &quot;flydoing&quot;</div></pre></td></tr></table></figure>
 </li>
 <li><p>生成 ssh key<br> 输入（注意改成你自己的 username）：</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;1262868349@qq.com&quot;</div></pre></td></tr></table></figure>
@@ -394,20 +394,20 @@
 <p> 然后会弹出，询问 are you sure …connect? 输入 yes 回车：</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">are you sure ...connect?yes</div></pre></td></tr></table></figure>
 <p> 成功的话会弹出：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hi，gjincai!.....sccessfully.....</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hi，flydoing!.....sccessfully.....</div></pre></td></tr></table></figure>
 </li>
-<li><p>在 GitHub 上 New 一个 <code>repository</code><br> 输入的项目名称为 <code>gjincai.github.io</code> ，即是 <code>username.github.io</code> </p>
+<li><p>在 GitHub 上 New 一个 <code>repository</code><br> 输入的项目名称为 <code>flydoing.github.io</code> ，即是 <code>username.github.io</code> </p>
 </li>
 <li><p>安装 deploy<br> 在 <code>hexo</code> 目录下右键 <code>git bash</code> ，进行安装 <code>hexo-deployer-git</code> 插件：</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
 </li>
 <li><p>配置 deploy<br> 打开 <code>hexo</code> 目录下的 <code>_config.yml</code> ，配置 <code>deploy</code>项：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">    type: git</div><div class="line">    repo:</div><div class="line">        github: git@github.com:gjincai/gjincai.github.io.git    #usernsme</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">    type: git</div><div class="line">    repo:</div><div class="line">        github: git@github.com:flydoing/flydoing.github.io.git    #usernsme</div></pre></td></tr></table></figure>
 <p> （备注：传说 <code>hexo2.x.x</code> 版本的 type:github 等等是不同的）</p>
 </li>
 <li><p>部署到 GitHub<br> <code>hexo</code> 目录下执行 git:</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d</div></pre></td></tr></table></figure>
-<p> 现在，在浏览器打开： <code>http://gjincai.github.io</code>，即 <code>http://username.github.io</code></p>
+<p> 现在，在浏览器打开： <code>http://flydoing.github.io</code>，即 <code>http://username.github.io</code></p>
 </li>
 </ol>
 <h2 id="多-PC-同步"><a href="#多-PC-同步" class="headerlink" title="多 PC 同步"></a>多 PC 同步</h2><p>这几天对 hexo 折腾，在公司的 PC 上搞、在宿舍自己的笔记本上也搞；问题来了，我在公司更改了 hexo 配置、写了文章，然后自然是保存在了公司 PC ；回到宿舍后，笔记本的本地文件当然就与公司不一致了。</p>
@@ -478,7 +478,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/03/05/hexo-next-博客安装、使用/"
-           data-title="hexo + next 博客安装、使用" data-url="http://gjincai.github.io/2016/03/05/hexo-next-博客安装、使用/">
+           data-title="hexo + next 博客安装、使用" data-url="http://flydoing.github.io/2016/03/05/hexo-next-博客安装、使用/">
       </div>
     
   </div>
@@ -554,7 +554,7 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/gjincai" target="_blank">
+                <a href="https://github.com/flydoing" target="_blank">
                   
                     <i class="fa fa-github"></i> GitHub
                   
@@ -863,7 +863,7 @@
   
 
   <script type="text/javascript">
-    var duoshuoQuery = {short_name:"gjincai"};
+    var duoshuoQuery = {short_name:"flydoing"};
     (function() {
       var ds = document.createElement('script');
       ds.type = 'text/javascript';ds.async = true;

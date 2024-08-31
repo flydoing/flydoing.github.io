@@ -61,8 +61,8 @@
 <meta name="keywords" content="react,react实例">
 <meta property="og:type" content="article">
 <meta property="og:title" content="react入门笔记（三）demo实例学习">
-<meta property="og:url" content="http://gjincai.github.io/2016/08/14/react入门笔记（三）demo实例学习/index.html">
-<meta property="og:site_name" content="Gjincai">
+<meta property="og:url" content="http://flydoing.github.io/2016/08/14/react入门笔记（三）demo实例学习/index.html">
+<meta property="og:site_name" content="Flydoing">
 <meta property="og:description" content="本文的实例demo主要涉及到 state状态机，组件的生命周期  react官网地址：React: A JAVASCRIPT LIBRARY FOR BUILDING USER INTERFACES 本文中的代码 github 地址：demo实例 demo的html模板本文中所有的 demo ，都采用以下这个 html 模板： 1234567891011121314151617&amp;lt;!DOCT">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-01-10T15:44:07.000Z">
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title> react入门笔记（三）demo实例学习 | Gjincai </title>
+  <title> react入门笔记（三）demo实例学习 | Flydoing </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -115,7 +115,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Gjincai</span>
+      <span class="site-title">Flydoing</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -326,7 +326,7 @@
 <p>本文的实例demo主要涉及到 state状态机，组件的生命周期</p>
 </blockquote>
 <p>react官网地址：<a href="https://facebook.github.io/react/index.html" target="_blank" rel="external">React: A JAVASCRIPT LIBRARY FOR BUILDING USER INTERFACES</a></p>
-<p>本文中的代码 github 地址：<a href="https://github.com/gjincai/react.js_learn" target="_blank" rel="external">demo实例</a></p>
+<p>本文中的代码 github 地址：<a href="https://github.com/flydoing/react.js_learn" target="_blank" rel="external">demo实例</a></p>
 <h2 id="demo的html模板"><a href="#demo的html模板" class="headerlink" title="demo的html模板"></a>demo的html模板</h2><p>本文中所有的 demo ，都采用以下这个 html 模板：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>react demo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../build/react.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../build/react-dom.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../build/browser.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"index.js"</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>  <span class="comment">&lt;!--引入的jsx文件--&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"jc"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- &lt;script type="text/babel"&gt;</span></div><div class="line"><span class="comment">  //jsx代码</span></div><div class="line"><span class="comment">&lt;/script&gt; --&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="demo6-state状态机"><a href="#demo6-state状态机" class="headerlink" title="demo6: state状态机"></a>demo6: state状态机</h2><p>React 将组件划分为不同的状态，每个React组件实例都有一个<code>state</code>变量，用来保存组件的当前状态。<br><code>state</code>: 组件的状态变量；<br><code>getInitialState()</code>: 设置组件初始状态，必须返回一个<code>JSON对象</code>或<code>空值null</code>；<br><code>setState(currentState)</code>: 设置组件当前状态，参数<code>currentState</code>是一个JSON对象；<code>setState()</code>方法会 将这个参数值与当前状态<code>this.sate</code>进行合并，结果作为状态变量的新值；不建议直接使用<code>this.state</code>来设置状态，<code>setState()</code>方法会自动 地重新渲染组件。</p>
@@ -379,7 +379,7 @@
 <p>实例demo：通过设置定时器，触发组件被重复render，查看具体方法在不同时间点的调用情况：</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//组件的生命周期</span></div><div class="line"><span class="keyword">var</span> MyMount = React.createClass(&#123;</div><div class="line">    getInitialState: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            width:<span class="number">20</span>,</div><div class="line">            backbg:<span class="string">'green'</span></div><div class="line">        &#125;;</div><div class="line">    &#125;,</div><div class="line">    componentWillMount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">this</span>.setState(&#123;</div><div class="line">            backbg:<span class="string">'red'</span></div><div class="line">        &#125;);</div><div class="line">        <span class="comment">// alert('componentWillMount');</span></div><div class="line">    &#125;,</div><div class="line">    componentDidMount: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> timer1 = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="keyword">var</span> width = <span class="keyword">this</span>.state.width;</div><div class="line">            width += <span class="number">10</span>;</div><div class="line">            <span class="keyword">if</span>(width &gt;= <span class="number">120</span>)&#123;</div><div class="line">                width = <span class="number">10</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">this</span>.setState(&#123;</div><div class="line">                width: width,</div><div class="line">                backbg:<span class="string">'green'</span></div><div class="line">            &#125;);</div><div class="line">        &#125;.bind(<span class="keyword">this</span>),<span class="number">200</span>);</div><div class="line">    &#125;,</div><div class="line">    render:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;div style=&#123;&#123;<span class="attr">height</span>:<span class="string">'40px'</span>,<span class="attr">width</span>:<span class="keyword">this</span>.state.width+<span class="string">'px'</span>,<span class="attr">background</span>:<span class="keyword">this</span>.state.backbg&#125;&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">ReactDOM.render(</div><div class="line">    &lt;MyMount/&gt;,</div><div class="line">    <span class="built_in">document</span>.getElementById(<span class="string">'jc'</span>)</div><div class="line">);</div></pre></td></tr></table></figure>
 <p>更多学习demo，待续…</p>
-<p>本文中的代码 github 地址：<a href="https://github.com/gjincai/react.js_learn" target="_blank" rel="external">demo实例</a></p>
+<p>本文中的代码 github 地址：<a href="https://github.com/flydoing/react.js_learn" target="_blank" rel="external">demo实例</a></p>
 
       
     </div>
@@ -440,7 +440,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/08/14/react入门笔记（三）demo实例学习/"
-           data-title="react入门笔记（三）demo实例学习" data-url="http://gjincai.github.io/2016/08/14/react入门笔记（三）demo实例学习/">
+           data-title="react入门笔记（三）demo实例学习" data-url="http://flydoing.github.io/2016/08/14/react入门笔记（三）demo实例学习/">
       </div>
     
   </div>
@@ -516,7 +516,7 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/gjincai" target="_blank">
+                <a href="https://github.com/flydoing" target="_blank">
                   
                     <i class="fa fa-github"></i> GitHub
                   
@@ -825,7 +825,7 @@
   
 
   <script type="text/javascript">
-    var duoshuoQuery = {short_name:"gjincai"};
+    var duoshuoQuery = {short_name:"flydoing"};
     (function() {
       var ds = document.createElement('script');
       ds.type = 'text/javascript';ds.async = true;
